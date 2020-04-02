@@ -42,3 +42,20 @@ VALUES ( (select id from cmgroup where name="SECTION"),"A","Section A",true ),
 ( (select id from cmgroup where name="SECTION"),"C","Section C",true ),
 ( (select id from cmgroup where name="SECTION"),"D","Section D",true ),
 ( (select id from cmgroup where name="SECTION"),"E","Section E",true );
+
+INSERT INTO `myschool`.`cmgroup`
+(
+`NAME`,
+`DESCRIPTION`,
+`ISACTIVE`)
+VALUES
+(
+"SCHTYPE",
+"School Type Public,Private,Chain",
+1);
+
+INSERT INTO `myschool`.`cmvalue`
+(`GROUPID`,`NAME`,`DESCRIPTION`,`ISACTIVE`)
+VALUES ( (select id from cmgroup where name="SCHTYPE"),"PUBLIC","Public/Government Schools",true ),
+( (select id from cmgroup where name="SCHTYPE"),"PRIVATE","Private Schools",true ),
+( (select id from cmgroup where name="SCHTYPE"),"CHAIN","Chain of schools",true );
