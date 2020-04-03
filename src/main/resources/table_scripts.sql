@@ -14,10 +14,15 @@ CREATE TABLE `address` (
   `DISTRICT` varchar(45) DEFAULT NULL,
   `STATE` varchar(45) DEFAULT NULL,
   `PINCODE` varchar(45) DEFAULT NULL,
-  `ISACTIVE` tinyint(1) DEFAULT NULL,
+  `ISACTIVE` tinyint(1) DEFAULT '1',
+  `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 CREATE TABLE `cmgroup` (
@@ -25,8 +30,13 @@ CREATE TABLE `cmgroup` (
   `NAME` varchar(45) NOT NULL,
   `DESCRIPTION` varchar(45) NOT NULL,
   `ISACTIVE` tinyint(1) unsigned zerofill DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 CREATE TABLE `cmvalue` (
@@ -35,23 +45,34 @@ CREATE TABLE `cmvalue` (
   `NAME` varchar(45) NOT NULL,
   `DESCRIPTION` varchar(45) DEFAULT NULL,
   `ISACTIVE` tinyint(1) unsigned zerofill DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `ID_idx` (`GROUPID`),
   CONSTRAINT `GROUPID` FOREIGN KEY (`GROUPID`) REFERENCES `cmgroup` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE `school` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `NAME` varchar(45) NOT NULL,
   `TYPE` int NOT NULL,
   `ADDRESSID` int NOT NULL,
-  `ISACTIVE` tinyint(1) DEFAULT NULL,
+  `ISACTIVE` tinyint(1) DEFAULT '1',
+  `anniversary` datetime DEFAULT NULL,
+  `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `ID_idx` (`ADDRESSID`),
   CONSTRAINT `ID` FOREIGN KEY (`ADDRESSID`) REFERENCES `address` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 CREATE TABLE `person` (
@@ -67,6 +88,10 @@ CREATE TABLE `person` (
   `EMAIL` varchar(45) DEFAULT NULL,
   `MOBILE` int NOT NULL,
   `ADDRESSID` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`,`ADDRESSID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `CATEGORYID_idx` (`CATEGORYID`),
