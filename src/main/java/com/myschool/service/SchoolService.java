@@ -31,12 +31,12 @@ public class SchoolService {
 
 	public SchoolEntity replaceEmployee(@RequestBody SchoolEntity newSchool, @PathVariable Long id) {
 		return schoolRepo.findById(id).map(school -> {
-			school.setName(newSchool.getName());
-			school.setAddress(newSchool.getAddress());
+//			school.setName(newSchool.getName());
+//			school.setAddress(newSchool.getAddress());
 			// school.setTypeId(newSchool.getTypeId());
 			return schoolRepo.save(school);
 		}).orElseGet(() -> {
-			newSchool.setSchoolId(id);
+			// newSchool.setSchoolId(id);
 			return schoolRepo.save(newSchool);
 		});
 	}
