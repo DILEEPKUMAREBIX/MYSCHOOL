@@ -7,13 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "cmvalue", schema = "myschool")
-@Getter
-@Setter
 public class CMValueEntity extends AuditingEntity {
 
 	@Id
@@ -32,4 +27,45 @@ public class CMValueEntity extends AuditingEntity {
 
 	@Column(name = "ISACTIVE")
 	private boolean isActive;
+
+	public Long getValueId() {
+		return valueId;
+	}
+
+	public void setValueId(Long valueId) {
+		this.valueId = valueId;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
 }

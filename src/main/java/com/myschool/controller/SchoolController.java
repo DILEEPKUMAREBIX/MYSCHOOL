@@ -3,8 +3,6 @@ package com.myschool.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,8 +23,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@Configuration
-@EnableAutoConfiguration
 @Api(value = "School CRUD", description = "Manage Schools list")
 @RequestMapping("/myschool")
 public class SchoolController {
@@ -59,13 +55,13 @@ public class SchoolController {
 
 	@ApiOperation(value = "Update/Create a  school", nickname = "UpdateOrCreateSchool")
 	@PutMapping("/schools/{id}")
-	SchoolEntity replaceEmployee(@RequestBody SchoolEntity newEmployee, @PathVariable Long id) {
-		return schoolService.replaceEmployee(newEmployee, id);
+	SchoolEntity updateSchool(@RequestBody SchoolEntity newSchool, @PathVariable Long id) {
+		return schoolService.replaceEmployee(newSchool, id);
 	}
 
 	@ApiOperation(value = "Delete a  school", nickname = "DeleteSchool")
 	@DeleteMapping("/schools/{id}")
-	void deleteEmployee(@PathVariable Long id) {
+	void deleteSchool(@PathVariable Long id) {
 		schoolService.deleteEmployee(id);
 	}
 
