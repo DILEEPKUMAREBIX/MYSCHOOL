@@ -71,3 +71,28 @@ INSERT INTO `myschool`.`cmvalue`
 VALUES ( (select id from cmgroup where name="SCHTYPE"),"PUBLIC","Public/Government Schools",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Sukesh","Sukesh" ),
 ( (select id from cmgroup where name="SCHTYPE"),"PRIVATE","Private Schools",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Sukesh","Sukesh" ),
 ( (select id from cmgroup where name="SCHTYPE"),"CHAIN","Chain of schools",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Sukesh","Sukesh" );
+
+
+
+INSERT INTO `myschool`.`cmgroup`
+(
+`NAME`,
+`DESCRIPTION`,
+`ISACTIVE`,
+`created_date`,
+`last_updated_date`,`created_user`,`last_updated_user`)
+VALUES
+(
+"UserCategory",
+"User type like student teacher parent etc.,",
+1,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep");
+
+INSERT INTO `myschool`.`cmvalue`
+(`GROUPID`,`NAME`,`DESCRIPTION`,`ISACTIVE`,`created_date`,`last_updated_date`, `created_user`,`last_updated_user`)
+VALUES ( (select id from cmgroup where name="UserCategory"),"STUDENT","STUDENT",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Sukesh","Sukesh" ),
+( (select id from cmgroup where name="UserCategory"),"TEACHER","TEACHER",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="UserCategory"),"PARENT","PARENT",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="UserCategory"),"ADMIN","ADMIN",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="UserCategory"),"HEADMASTER","HEADMASTER",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" );
+
+
