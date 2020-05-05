@@ -19,17 +19,36 @@ public class UserPrincipal implements UserDetails {
 		this.user = user;
 	}
 
+//	@Override
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+//
+//		this.user.getRolesList().forEach(r -> {
+//			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
+//			authorities.add(authority);
+//		});
+//
+//		this.user.getPermissionsList().forEach(p -> {
+//			GrantedAuthority authority = new SimpleGrantedAuthority(p);
+//			authorities.add(authority);
+//		});
+//
+//		return authorities;
+//	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> authorities = new ArrayList<>();
 
-		this.user.getRolesList().forEach(r -> {
-			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
+		// Extract list of permissions (name)
+		this.user.getPermissionsList().forEach(p -> {
+			GrantedAuthority authority = new SimpleGrantedAuthority(p);
 			authorities.add(authority);
 		});
 
-		this.user.getPermissionsList().forEach(p -> {
-			GrantedAuthority authority = new SimpleGrantedAuthority(p);
+		// Extract list of roles (ROLE_name)
+		this.user.getRolesList().forEach(r -> {
+			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
 			authorities.add(authority);
 		});
 
