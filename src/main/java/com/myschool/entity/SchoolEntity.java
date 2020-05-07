@@ -1,5 +1,7 @@
 package com.myschool.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,12 +32,15 @@ public class SchoolEntity extends AuditingEntity {
 	private Long typeId;
 
 	// @Column(name = "TYPE")
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name = "TYPE", insertable = false, updatable = false)
 	private CMValueEntity type;
 
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
+	
+	@Column(name = "ANNIVERSARY")
+	private Date anniversary;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "ADDRESSID")

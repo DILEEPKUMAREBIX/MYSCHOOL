@@ -60,11 +60,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.addFilter(new JwtAutherizationFilter(authenticationManager(), this.userRepository))
 				.authorizeRequests()
 				// configure access rules
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
-				.antMatchers("/myschool/schools/*").hasRole("STUDENT")
+				.antMatchers(HttpMethod.POST, "/login").permitAll();
+				/*.antMatchers("/myschool/schools/*").hasRole("STUDENT")
 				.antMatchers("/myschool/users/*").hasRole("ADMIN")
 				.anyRequest().authenticated();
-
+*/
 	}
 
 	@Bean
