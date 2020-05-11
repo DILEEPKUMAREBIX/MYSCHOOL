@@ -18,7 +18,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-	 List<VendorExtension> vendorExtensions = new ArrayList<>();
+	 @SuppressWarnings("rawtypes")
+	List<VendorExtension> vendorExtensions = new ArrayList<>();
 
 	@Bean
 	public Docket productApi() {

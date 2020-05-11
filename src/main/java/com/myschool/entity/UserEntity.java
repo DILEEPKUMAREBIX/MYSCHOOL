@@ -46,7 +46,7 @@ public class UserEntity extends AuditingEntity {
 	@Column(name = "CATEGORYID")
 	private Long categoryId;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CATEGORYID", insertable = false, updatable = false)
 	private CMValueEntity category;
 
@@ -57,7 +57,7 @@ public class UserEntity extends AuditingEntity {
 	@Column(name = "SCHOOLID")
 	private Long schoolId;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(unique = true, name = "SCHOOLID", insertable = false, updatable = false)
 	private SchoolEntity school;
 
