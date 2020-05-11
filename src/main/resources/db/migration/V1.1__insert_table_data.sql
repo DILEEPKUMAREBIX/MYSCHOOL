@@ -73,7 +73,6 @@ VALUES ( (select id from cmgroup where name="SCHTYPE"),"PUBLIC","Public/Governme
 ( (select id from cmgroup where name="SCHTYPE"),"CHAIN","Chain of schools",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Sukesh","Sukesh" );
 
 
-
 INSERT INTO `myschool`.`cmgroup`
 (
 `NAME`,
@@ -94,5 +93,3 @@ VALUES ( (select id from cmgroup where name="UserCategory"),"STUDENT","STUDENT",
 ( (select id from cmgroup where name="UserCategory"),"PARENT","PARENT",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
 ( (select id from cmgroup where name="UserCategory"),"ADMIN","ADMIN",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
 ( (select id from cmgroup where name="UserCategory"),"HEADMASTER","HEADMASTER",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" );
-
-

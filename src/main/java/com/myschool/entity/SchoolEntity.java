@@ -32,13 +32,13 @@ public class SchoolEntity extends AuditingEntity {
 	private Long typeId;
 
 	// @Column(name = "TYPE")
-	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "TYPE", insertable = false, updatable = false)
 	private CMValueEntity type;
 
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
-	
+
 	@Column(name = "ANNIVERSARY")
 	private Date anniversary;
 
