@@ -2,6 +2,8 @@ package com.myschool.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,8 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/myschool")
 @CrossOrigin
 public class SchoolController {
+	
+	private static final Logger logger = LogManager.getLogger(SchoolController.class);
 
 	@Autowired
 	private SchoolService schoolService;
@@ -46,12 +50,15 @@ public class SchoolController {
 	@ApiOperation(value = "View a school", response = Iterable.class)
 	@GetMapping("/schools/{id}")
 	SchoolEntity getSchool(@PathVariable Long id) {
+		
 		return schoolService.getSchool(id);
 	}
 
 	@ApiOperation(value = "Create a new school", nickname = "CreateSchool")
 	@PostMapping(value = "/schools", headers = "Accept=application/json", produces = "application/json")
 	private ResponseEntity<SchoolEntity> saveSchool(@RequestBody SchoolEntity school) {
+		
+		logger.info("school saved sucessfully::::::::::::::::::" );
 		return new ResponseEntity<SchoolEntity>(schoolService.saveSchool(school), HttpStatus.OK);
 	}
 
@@ -64,6 +71,7 @@ public class SchoolController {
 	@ApiOperation(value = "Delete a  school", nickname = "DeleteSchool")
 	@DeleteMapping("/schools/{id}")
 	void deleteSchool(@PathVariable Long id) {
+		logger.info("school deleted with id:::::::::::"+id );
 		schoolService.deleteEmployee(id);
 	}
 
