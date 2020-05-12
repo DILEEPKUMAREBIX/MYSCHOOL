@@ -102,3 +102,25 @@ CREATE TABLE `user` (
   CONSTRAINT `CATEGORYIDX` FOREIGN KEY (`CATEGORYID`) REFERENCES `cmvalue` (`ID`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `SCHOOLIDX` FOREIGN KEY (`SCHOOLID`) REFERENCES `school` (`ID`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `userclass` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created_user` varchar(255) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `last_updated_user` varchar(255) DEFAULT NULL,
+  `last_updated_date` datetime DEFAULT NULL,
+  `academicyear` varchar(255) DEFAULT NULL,
+  `classid` int DEFAULT NULL,
+  `isactive` bit(1) DEFAULT NULL,
+  `sectionid` int DEFAULT NULL,
+  `userid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKbkw8gvfqltclm8kquj7cfxs03` (`classid`),
+  KEY `FKc23o966yy1sqbmxvsp0lue5xm` (`sectionid`),
+  KEY `FKp892caelskg4ug9krrqgx43qp` (`userid`),
+  CONSTRAINT `FKbkw8gvfqltclm8kquj7cfxs03` FOREIGN KEY (`classid`) REFERENCES `cmvalue` (`ID`),
+  CONSTRAINT `FKc23o966yy1sqbmxvsp0lue5xm` FOREIGN KEY (`sectionid`) REFERENCES `cmvalue` (`ID`),
+  CONSTRAINT `FKp892caelskg4ug9krrqgx43qp` FOREIGN KEY (`userid`) REFERENCES `user` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
