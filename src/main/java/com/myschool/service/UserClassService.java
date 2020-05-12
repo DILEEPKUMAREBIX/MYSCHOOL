@@ -38,7 +38,6 @@ public class UserClassService {
 			
 			return userClassRepo.save(userclass);
 		}).orElseGet(() -> {
-			// newSchool.setSchoolId(id);
 			return userClassRepo.save(newuserclass);
 		});
 	}
