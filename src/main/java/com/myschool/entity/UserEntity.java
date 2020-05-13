@@ -43,9 +43,6 @@ public class UserEntity extends AuditingEntity {
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 
-	
-	
-
 	@Column(name = "FATHERNAME")
 	private String fatherName;
 
@@ -76,16 +73,15 @@ public class UserEntity extends AuditingEntity {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DOB")
-	protected Date dateOfBirth;
+	private Date dateOfBirth;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "JOINING DATE")
-	protected Date joiningDate;
+	@Column(name = "JOININGDATE")
+	private Date joiningDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ENDING DATE")
-	protected Date endingDate;
-	
+	@Column(name = "ENDINGDATE")
+	private Date endingDate;
 	
 	@Column(name = "SCHOOLID")
 	private Long schoolId;
