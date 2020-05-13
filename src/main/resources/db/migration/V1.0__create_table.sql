@@ -88,6 +88,8 @@ CREATE TABLE `user` (
   `ROLES` varchar(100) NOT NULL,
   `PERMISSIONS` varchar(100) NOT NULL,
   `DOB` datetime NOT NULL,
+  `joiningDate` datetime NOT NULL,
+  `endingDate` datetime NOT NULL,
   `created_date` datetime NOT NULL,
   `created_user` varchar(45) NOT NULL,
   `last_updated_date` datetime NOT NULL,

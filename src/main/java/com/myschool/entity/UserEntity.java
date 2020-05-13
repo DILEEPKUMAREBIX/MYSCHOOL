@@ -43,23 +43,8 @@ public class UserEntity extends AuditingEntity {
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 
-	@Column(name = "CATEGORYID")
-	private Long categoryId;
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "CATEGORYID", insertable = false, updatable = false)
-	private CMValueEntity category;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique = true, name = "ADDRESSID")
-	private AddressEntity address;
-
-	@Column(name = "SCHOOLID")
-	private Long schoolId;
-
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(unique = true, name = "SCHOOLID", insertable = false, updatable = false)
-	private SchoolEntity school;
+	
+	
 
 	@Column(name = "FATHERNAME")
 	private String fatherName;
@@ -92,6 +77,34 @@ public class UserEntity extends AuditingEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DOB")
 	protected Date dateOfBirth;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "JOINING DATE")
+	protected Date joiningDate;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ENDING DATE")
+	protected Date endingDate;
+	
+	
+	@Column(name = "SCHOOLID")
+	private Long schoolId;
+
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(unique = true, name = "SCHOOLID", insertable = false, updatable = false)
+	private SchoolEntity school;
+	
+	@Column(name = "CATEGORYID")
+	private Long categoryId;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "CATEGORYID", insertable = false, updatable = false)
+	private CMValueEntity category;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true, name = "ADDRESSID")
+	private AddressEntity address;
+
 
 	public List<String> getRolesList() {
 		if (this.roles.length() > 0) {
@@ -258,5 +271,22 @@ public class UserEntity extends AuditingEntity {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+
+	public Date getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(Date joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+
+	public Date getEndingDate() {
+		return endingDate;
+	}
+
+	public void setEndingDate(Date endingDate) {
+		this.endingDate = endingDate;
+	}
+	
 
 }
