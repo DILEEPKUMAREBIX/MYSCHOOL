@@ -24,18 +24,18 @@ public class ClassTeacherSubjectEntity extends AuditingEntity{
 	@ApiModelProperty(notes = "The database generated product ID")
 	private Long ClassTeacherSubjectId;
 	
-	@Column(name = "CLASSID")
-	private Long classId;
-	
 	@Column(name="YEAR")
 	private String year;
 	
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
-
+	
+	@Column(name = "CLASSID")
+	private Long classId;
+	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CLASSID", insertable = false, updatable = false)
-	private CMValueEntity userClass;
+	private CMValueEntity userClassId;
 	
 	@Column(name = "TEACHERUSERID")
 	private Long teacheruserId;
@@ -83,12 +83,14 @@ public class ClassTeacherSubjectEntity extends AuditingEntity{
 		this.isActive = isActive;
 	}
 
-	public CMValueEntity getUserClass() {
-		return userClass;
+	
+
+	public CMValueEntity getUserClassId() {
+		return userClassId;
 	}
 
-	public void setUserClass(CMValueEntity userClass) {
-		this.userClass = userClass;
+	public void setUserClassId(CMValueEntity userClassId) {
+		this.userClassId = userClassId;
 	}
 
 	public Long getTeacheruserId() {

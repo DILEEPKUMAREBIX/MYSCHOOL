@@ -55,7 +55,7 @@ public class ClassTeacherSubjectController {
 
 	@ApiOperation(value = "Create a new class teacher subject", nickname = "Create class teacher subject")
 	@PostMapping(value = "/classteachersubjects", headers = "Accept=application/json", produces = "application/json")
-	private ResponseEntity<ClassTeacherSubjectEntity> saveSchool(@RequestBody ClassTeacherSubjectEntity ClassTeacherSubject) {
+	private ResponseEntity<ClassTeacherSubjectEntity> saveClassTeacherSubject(@RequestBody ClassTeacherSubjectEntity ClassTeacherSubject) {
 		
 		logger.info("ClassTeacherSubjectEntity saved sucessfully::::::::::::::::::" );
 		return new ResponseEntity<ClassTeacherSubjectEntity>(classTeacherSubjectService.saveClassTeacherSubject(ClassTeacherSubject),
@@ -64,7 +64,7 @@ public class ClassTeacherSubjectController {
 
 	@ApiOperation(value = "Update/Create a  class teacher subject", nickname = "UpdateOrCreate class teacher subject")
 	@PutMapping("/classteachersubjects/{id}")
-	ClassTeacherSubjectEntity updateSchool(@RequestBody ClassTeacherSubjectEntity newClassTeacherSubject, @PathVariable Long id) {
+	ClassTeacherSubjectEntity updateClassTeacherSubject(@RequestBody ClassTeacherSubjectEntity newClassTeacherSubject, @PathVariable Long id) {
 		return classTeacherSubjectService.replaceClassTeacherSubject(newClassTeacherSubject, id);
 	}
 

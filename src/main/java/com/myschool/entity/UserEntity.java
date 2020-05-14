@@ -80,7 +80,7 @@ public class UserEntity extends AuditingEntity {
 	private Date joiningDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ENDINGDATE")
+	@Column(name = "ENDINGDATE",nullable = true)
 	private Date endingDate;
 	
 	@Column(name = "SCHOOLID")
