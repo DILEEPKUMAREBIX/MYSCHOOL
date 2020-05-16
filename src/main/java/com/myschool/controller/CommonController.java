@@ -26,22 +26,23 @@ public class CommonController {
 
 	@Autowired
 	private UserService userservice;
-	
+
 	@Autowired
 	private CommonService commonservice;
 
 	@GetMapping(value = "/schoolscount")
-	public ResponseEntity<Long>  getSchoolsCount() {
+	public ResponseEntity<Long> getSchoolsCount() {
 		return new ResponseEntity<Long>(schoolservice.getSchoolsCount(), HttpStatus.OK);
 
 	}
+
 	@GetMapping(value = "/userscount")
 	public ResponseEntity<Long> getUsersCount() {
-		return new ResponseEntity<Long>(userservice.getUserCount(), HttpStatus.OK);		
+		return new ResponseEntity<Long>(userservice.getUserCount(), HttpStatus.OK);
 	}
-	
-	@GetMapping(value = "/groupdata")
-	public ResponseEntity<List<CMGroupValuesDto>> getGroupValueData(){
+
+	@GetMapping(value = "/commonvalues")
+	public ResponseEntity<List<CMGroupValuesDto>> getGroupValueData() {
 		return new ResponseEntity<List<CMGroupValuesDto>>(commonservice.getGroupValueData(), HttpStatus.OK);
 	}
 

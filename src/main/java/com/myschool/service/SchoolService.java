@@ -15,48 +15,48 @@ import com.myschool.repository.SchoolRepository;
 
 @Service
 public class SchoolService {
-	
+
 	private static final Logger logger = LogManager.getLogger(SchoolService.class);
 
 	@Autowired
 	private SchoolRepository schoolRepo;
 
 	public List<SchoolEntity> getSchools() {
-		logger.info("controller list of schools :::::::::::" );
+		logger.info("controller list of schools :::::::::::");
 		return schoolRepo.findAll();
 	}
 
 	public SchoolEntity getSchool(@PathVariable Long id) {
-		logger.info("service selected school details with id:::::::::::"+id );
+		logger.info("service selected school details with id:::::::::::" + id);
 		return schoolRepo.findById(id).orElseThrow(() -> new SchoolNotFoundException(id));
 	}
 
 	public SchoolEntity saveSchool(SchoolEntity school) {
-		logger.info("service school saved sucessfully::::::::::::::::::" );
+		logger.info("service school saved sucessfully::::::::::::::::::");
 		return schoolRepo.save(school);
 	}
 
 	public SchoolEntity updatedSchool(@RequestBody SchoolEntity newSchool, @PathVariable Long id) {
-		logger.info("service school updated with id:::::::::::"+id );
+		logger.info("service school updated with id:::::::::::" + id);
 		return schoolRepo.findById(id).map(school -> {
 			school.setName(newSchool.getName());
 			school.setAddress(newSchool.getAddress());
 			school.setTypeId(newSchool.getTypeId());
 			return schoolRepo.save(school);
-			
+
 		}).orElseGet(() -> {
 			return schoolRepo.save(newSchool);
 		});
 	}
 
 	public void deleteEmployee(@PathVariable Long id) {
-		logger.info("service school deleted with id:::::::::::"+id );
+		logger.info("service school deleted with id:::::::::::" + id);
 		schoolRepo.deleteById(id);
 	}
-	
+
 	public Long getSchoolsCount() {
-		Long count=schoolRepo.count();
-		logger.info("service total schools count:::::::::::"+count);
+		Long count = schoolRepo.count();
+		logger.info("service total schools count:::::::::::" + count);
 		return count;
 	}
 }

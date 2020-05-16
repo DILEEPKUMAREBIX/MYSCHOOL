@@ -13,10 +13,10 @@ import com.myschool.repository.ClassTeacherSubjectRepository;
 
 @Service
 public class ClassTeacherSubjectService {
-	
+
 	@Autowired
 	private ClassTeacherSubjectRepository ClassTeacherSubjectrpo;
-	
+
 	public List<ClassTeacherSubjectEntity> getClassTeacherSubjects() {
 		return ClassTeacherSubjectrpo.findAll();
 	}
@@ -29,8 +29,8 @@ public class ClassTeacherSubjectService {
 		return ClassTeacherSubjectrpo.save(ClassTeacherSubject);
 	}
 
-	public ClassTeacherSubjectEntity replaceClassTeacherSubject(@RequestBody ClassTeacherSubjectEntity newClassTeacherSubject,
-			@PathVariable Long id) {
+	public ClassTeacherSubjectEntity replaceClassTeacherSubject(
+			@RequestBody ClassTeacherSubjectEntity newClassTeacherSubject, @PathVariable Long id) {
 		return ClassTeacherSubjectrpo.findById(id).map(ClassTeacherSubject -> {
 			ClassTeacherSubject.setYear(newClassTeacherSubject.getYear());
 			ClassTeacherSubject.setIsActive(newClassTeacherSubject.getIsActive());

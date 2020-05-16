@@ -10,13 +10,12 @@ import com.myschool.repository.CMGroupRepository;
 
 @Service
 public class CommonService {
-	
+
 	@Autowired
 	private CMGroupRepository cmgrouprepo;
-	
+
 	public List<CMGroupValuesDto> getGroupValueData() {
 		return cmgrouprepo.getAllGroupValueData();
 	}
-	
-	
+
 }

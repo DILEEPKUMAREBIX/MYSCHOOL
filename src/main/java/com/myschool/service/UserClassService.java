@@ -16,7 +16,7 @@ public class UserClassService {
 
 	@Autowired
 	private UserClassRepository userClassRepo;
-	
+
 	public List<UserClassEntity> getUserClasses() {
 		return userClassRepo.findAll();
 	}
@@ -35,16 +35,14 @@ public class UserClassService {
 			userclass.setClassId(newuserclass.getClassId());
 			userclass.setSection(newuserclass.getSection());
 
-			
 			return userClassRepo.save(userclass);
 		}).orElseGet(() -> {
 			return userClassRepo.save(newuserclass);
 		});
 	}
-	
 
 	public void deleteUserClass(@PathVariable Long id) {
 		userClassRepo.deleteById(id);
 	}
-	
+
 }
