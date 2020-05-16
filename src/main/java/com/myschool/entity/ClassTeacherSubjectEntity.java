@@ -16,48 +16,40 @@ import lombok.Data;
 @Entity
 @Table(name = "classteachersubject", schema = "myschool")
 @Data
-public class ClassTeacherSubjectEntity extends AuditingEntity{
+public class ClassTeacherSubjectEntity extends AuditingEntity {
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes = "The database generated product ID")
-	private Long ClassTeacherSubjectId;
-	
-	@Column(name="YEAR")
+	private Long classTeacherSubjectId;
+
+	@Column(name = "YEAR")
 	private String year;
-	
+
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
-	
+
 	@Column(name = "CLASSID")
 	private Long classId;
-	
+
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CLASSID", insertable = false, updatable = false)
 	private CMValueEntity userClassId;
-	
+
 	@Column(name = "TEACHERUSERID")
 	private Long teacheruserId;
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "TEACHERUSERID", insertable = false, updatable = false)
 	private UserEntity classteacheruser;
-	
+
 	@Column(name = "SUBJECTID")
-	private Long SubjectId;
+	private Long subjectId;
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "SUBJECTID", insertable = false, updatable = false)
 	private CMValueEntity Subject;
-
-	public Long getClassTeacherSubjectId() {
-		return ClassTeacherSubjectId;
-	}
-
-	public void setClassTeacherSubjectId(Long classTeacherSubjectId) {
-		ClassTeacherSubjectId = classTeacherSubjectId;
-	}
 
 	public Long getClassId() {
 		return classId;
@@ -83,8 +75,6 @@ public class ClassTeacherSubjectEntity extends AuditingEntity{
 		this.isActive = isActive;
 	}
 
-	
-
 	public CMValueEntity getUserClassId() {
 		return userClassId;
 	}
@@ -109,14 +99,6 @@ public class ClassTeacherSubjectEntity extends AuditingEntity{
 		this.classteacheruser = classteacheruser;
 	}
 
-	public Long getSubjectId() {
-		return SubjectId;
-	}
-
-	public void setSubjectId(Long subjectId) {
-		SubjectId = subjectId;
-	}
-
 	public CMValueEntity getSubject() {
 		return Subject;
 	}
@@ -124,9 +106,21 @@ public class ClassTeacherSubjectEntity extends AuditingEntity{
 	public void setSubject(CMValueEntity subject) {
 		Subject = subject;
 	}
-	
-	
-	
-	
+
+	public Long getClassTeacherSubjectId() {
+		return classTeacherSubjectId;
+	}
+
+	public void setClassTeacherSubjectId(Long classTeacherSubjectId) {
+		this.classTeacherSubjectId = classTeacherSubjectId;
+	}
+
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
+	}
 
 }
