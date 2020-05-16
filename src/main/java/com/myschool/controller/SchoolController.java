@@ -43,6 +43,7 @@ public class SchoolController {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@GetMapping(value = "/schools")
 	private List<SchoolEntity> getSchools() {
+		logger.info("controller list of schools :::::::::::" );
 		return schoolService.getSchools();
 	}
 
@@ -50,7 +51,7 @@ public class SchoolController {
 	@ApiOperation(value = "View a school", response = Iterable.class)
 	@GetMapping("/schools/{id}")
 	SchoolEntity getSchool(@PathVariable Long id) {
-		
+		logger.info("controller selected school details with id:::::::::::"+id );
 		return schoolService.getSchool(id);
 	}
 
@@ -58,20 +59,22 @@ public class SchoolController {
 	@PostMapping(value = "/schools", headers = "Accept=application/json", produces = "application/json")
 	private ResponseEntity<SchoolEntity> saveSchool(@RequestBody SchoolEntity school) {
 		
-		logger.info("school saved sucessfully::::::::::::::::::" );
+		logger.info("controller school saved sucessfully::::::::::::::::::" );
 		return new ResponseEntity<SchoolEntity>(schoolService.saveSchool(school), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Update/Create a  school", nickname = "UpdateOrCreateSchool")
 	@PutMapping("/schools/{id}")
 	SchoolEntity updateSchool(@RequestBody SchoolEntity newSchool, @PathVariable Long id) {
-		return schoolService.replaceEmployee(newSchool, id);
+		logger.info("controller school updated with id:::::::::::"+id );
+		
+		return schoolService.updatedSchool(newSchool, id);
 	}
 
 	@ApiOperation(value = "Delete a  school", nickname = "DeleteSchool")
 	@DeleteMapping("/schools/{id}")
 	void deleteSchool(@PathVariable Long id) {
-		logger.info("school deleted with id:::::::::::"+id );
+		logger.info("controller school deleted with id:::::::::::"+id );
 		schoolService.deleteEmployee(id);
 	}
 
