@@ -13,14 +13,19 @@ import com.myschool.entity.CMGroupEntity;
 @Repository
 public interface CMGroupRepository extends JpaRepository<CMGroupEntity, Long>{
 
+	String cmgroupdata="SELECT NEW com.myschool.Dto.CMGroupValuesDto"
+			+ "(cg.groupId,cg.name,cg.description,cv.groupId,cv.name,cv.description,cv.isActive)"
+			+ " FROM CMGroupEntity cg JOIN CMValueEntity cv ON cg.groupId=cv.groupId";
 	
-	String cmgroupdata="select cg.groupId,cg.name,cg.description,"
+	
+	
+	
+	/*String cmgroupdata="SELECT cg.groupId,cg.name,cg.description,"
 			+ "cv.groupId,cv.name,cv.description,cv.isActive FROM "
-			+ "CMGroupEntity cg JOIN CMValueEntity cv ON cg.groupId=cv.groupId";
+			+ "CMGroupEntity cg JOIN CMValueEntity cv ON cg.groupId=cv.groupId";*/
 	@Query(cmgroupdata)
 	List<CMGroupValuesDto> getAllGroupValueData();
 }
-
 
 
 

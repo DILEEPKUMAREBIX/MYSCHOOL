@@ -9,21 +9,26 @@ public class CMGroupValuesDto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String CmGroupId;
+	Long CmGroupId;
 	String CmGroupName;
 	String CmGroupDescription;
-	String groupId;
+	Long groupId;
 	String name;
 	String description;
-	String isActive;
+	boolean isActive;
 	
 	
 	
 	
 	public CMGroupValuesDto() {
 	}
-	public CMGroupValuesDto(String cmGroupId, String cmGroupName, String cmGroupDescription, String groupId,
-			String name, String description, String isActive) {
+
+
+
+
+	public CMGroupValuesDto(Long cmGroupId, String cmGroupName, String cmGroupDescription, Long groupId, String name,
+			String description, boolean isActive) {
+		super();
 		CmGroupId = cmGroupId;
 		CmGroupName = cmGroupName;
 		CmGroupDescription = cmGroupDescription;
@@ -32,49 +37,110 @@ public class CMGroupValuesDto implements Serializable{
 		this.description = description;
 		this.isActive = isActive;
 	}
-	public String getCmGroupId() {
+
+
+
+
+	public Long getCmGroupId() {
 		return CmGroupId;
 	}
-	public void setCmGroupId(String cmGroupId) {
+
+
+
+
+	public void setCmGroupId(Long cmGroupId) {
 		CmGroupId = cmGroupId;
 	}
+
+
+
+
 	public String getCmGroupName() {
 		return CmGroupName;
 	}
+
+
+
+
 	public void setCmGroupName(String cmGroupName) {
 		CmGroupName = cmGroupName;
 	}
+
+
+
+
 	public String getCmGroupDescription() {
 		return CmGroupDescription;
 	}
+
+
+
+
 	public void setCmGroupDescription(String cmGroupDescription) {
 		CmGroupDescription = cmGroupDescription;
 	}
-	public String getGroupId() {
+
+
+
+
+	public Long getGroupId() {
 		return groupId;
 	}
-	public void setGroupId(String groupId) {
+
+
+
+
+	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
 	}
+
+
+
+
 	public String getName() {
 		return name;
 	}
+
+
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+
+
 	public String getDescription() {
 		return description;
 	}
+
+
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getIsActive() {
+
+
+
+
+	public boolean isActive() {
 		return isActive;
 	}
-	public void setIsActive(String isActive) {
+
+
+
+
+	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
-	
+
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
