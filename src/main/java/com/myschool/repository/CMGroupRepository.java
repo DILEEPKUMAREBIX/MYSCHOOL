@@ -13,7 +13,7 @@ import com.myschool.entity.CMGroupEntity;
 public interface CMGroupRepository extends JpaRepository<CMGroupEntity, Long> {
 
 	String cmgroupdata = "SELECT NEW com.myschool.Dto.CMGroupValuesDto"
-			+ "(cg.groupId,cg.name,cg.description,cv.groupId,cv.name,cv.description,cv.isActive)"
+			+ "(cg.groupId,cg.name,cg.description,cv.groupId,cv.valueId,cv.name,cv.description,cv.isActive)"
 			+ " FROM CMGroupEntity cg JOIN CMValueEntity cv ON cg.groupId=cv.groupId";
 
 	@Query(cmgroupdata)
