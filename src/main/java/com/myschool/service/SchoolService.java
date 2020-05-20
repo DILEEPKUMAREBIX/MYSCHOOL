@@ -49,7 +49,7 @@ public class SchoolService {
 		});
 	}
 
-	public void deleteEmployee(@PathVariable Long id) {
+	public void deleteschool(@PathVariable Long id) {
 		logger.info("service school deleted with id:::::::::::" + id);
 		schoolRepo.deleteById(id);
 	}
