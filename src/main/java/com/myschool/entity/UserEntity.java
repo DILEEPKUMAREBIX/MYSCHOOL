@@ -19,6 +19,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -101,6 +104,8 @@ public class UserEntity extends AuditingEntity {
 	@JoinColumn(unique = true, name = "ADDRESSID")
 	private AddressEntity address;
 
+	@Transient
+	private MultipartFile file;
 
 	public List<String> getRolesList() {
 		if (this.roles.length() > 0) {
@@ -146,46 +151,6 @@ public class UserEntity extends AuditingEntity {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
-	}
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public CMValueEntity getCategory() {
-		return category;
-	}
-
-	public void setCategory(CMValueEntity category) {
-		this.category = category;
-	}
-
-	public AddressEntity getAddress() {
-		return address;
-	}
-
-	public void setAddress(AddressEntity address) {
-		this.address = address;
-	}
-
-	public Long getSchoolId() {
-		return schoolId;
-	}
-
-	public void setSchoolId(Long schoolId) {
-		this.schoolId = schoolId;
-	}
-
-	public SchoolEntity getSchool() {
-		return school;
-	}
-
-	public void setSchool(SchoolEntity school) {
-		this.school = school;
 	}
 
 	public String getFatherName() {
@@ -283,6 +248,56 @@ public class UserEntity extends AuditingEntity {
 	public void setEndingDate(Date endingDate) {
 		this.endingDate = endingDate;
 	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public Long getSchoolId() {
+		return schoolId;
+	}
+
+	public void setSchoolId(Long schoolId) {
+		this.schoolId = schoolId;
+	}
+
+	public SchoolEntity getSchool() {
+		return school;
+	}
+
+	public void setSchool(SchoolEntity school) {
+		this.school = school;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public CMValueEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CMValueEntity category) {
+		this.category = category;
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
+
+
 	
 
 }

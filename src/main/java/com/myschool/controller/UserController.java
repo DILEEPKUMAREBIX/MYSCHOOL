@@ -76,4 +76,7 @@ public class UserController {
 		logger.info("controller user daleted with id :::::::::"+id);
 		userService.deleteUser(id);
 	}
+	
+	
+	
 }

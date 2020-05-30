@@ -41,6 +41,7 @@ public class SchoolService {
 		return schoolRepo.findById(id).map(school -> {
 			school.setName(newSchool.getName());
 			school.setAddress(newSchool.getAddress());
+			school.setAnniversary(newSchool.getAnniversary());
 			school.setTypeId(newSchool.getTypeId());
 			return schoolRepo.save(school);
 

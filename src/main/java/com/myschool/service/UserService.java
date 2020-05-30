@@ -24,7 +24,7 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	public List<UserEntity> getUsers() {
 		logger.info("service list of users::::::::::::::");
 		return userRepo.findAll();
@@ -44,12 +44,31 @@ public class UserService {
 	public UserEntity updateUser(@RequestBody UserEntity newUser, @PathVariable Long id) {
 		logger.info("service user updated with id::::::::::" + id);
 		return userRepo.findById(id).map(user -> {
-			// school.setName(newSchool.getName());
-			// school.setAddress(newSchool.getAddress());
-			// school.setTypeId(newSchool.getTypeId());
+			user.setFirstName(newUser.getFirstName());
+			user.setLastName(newUser.getLastName());
+			user.setFatherName(newUser.getFatherName());
+			user.setMotherName(newUser.getMotherName());
+			user.setImage(newUser.getImage());
+			user.setUserName(newUser.getUserName());
+			user.setPassword(newUser.getPassword());
+			user.setEmail(newUser.getEmail());
+			user.setPhone(newUser.getPhone());
+			user.setRoles(newUser.getRoles());
+			user.setPermissions(newUser.getPermissions());
+			user.setDateOfBirth(newUser.getDateOfBirth());
+			user.setJoiningDate(newUser.getJoiningDate());
+			user.setEndingDate(newUser.getEndingDate());
+			user.setSchoolId(newUser.getSchoolId());
+			user.setCategoryId(newUser.getCategoryId());
+			user.setCreatedBy(newUser.getCreatedBy());
+			user.setCreatedDate(newUser.getCreatedDate());
+			
+
+			
+			
+			user.setAddress(newUser.getAddress());
 			return userRepo.save(user);
 		}).orElseGet(() -> {
-			// newSchool.setSchoolId(id);
 			return userRepo.save(newUser);
 		});
 	}

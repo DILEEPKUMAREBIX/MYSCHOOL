@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -39,6 +41,7 @@ public class SchoolEntity extends AuditingEntity {
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "ANNIVERSARY")
 	private Date anniversary;
 
@@ -86,6 +89,14 @@ public class SchoolEntity extends AuditingEntity {
 		this.isActive = isActive;
 	}
 
+	public Date getAnniversary() {
+		return anniversary;
+	}
+
+	public void setAnniversary(Date anniversary) {
+		this.anniversary = anniversary;
+	}
+
 	public AddressEntity getAddress() {
 		return address;
 	}
@@ -93,5 +104,6 @@ public class SchoolEntity extends AuditingEntity {
 	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
+
 
 }
