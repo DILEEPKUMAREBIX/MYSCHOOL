@@ -2,6 +2,8 @@ package com.myschool.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,8 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/myschool")
 @CrossOrigin
 public class SchoolController {
+	
+	private static final Logger logger = LogManager.getLogger(SchoolController.class);
 
 	@Autowired
 	private SchoolService schoolService;
@@ -39,32 +43,45 @@ public class SchoolController {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@GetMapping(value = "/schools")
 	private List<SchoolEntity> getSchools() {
-		return schoolService.getSchools();
+		List<SchoolEntity> schoollist=schoolService.getSchools();
+		logger.info("controller list of schools :::::::::::" );
+		return schoollist;
 	}
 
 	// Single item
 	@ApiOperation(value = "View a school", response = Iterable.class)
 	@GetMapping("/schools/{id}")
 	SchoolEntity getSchool(@PathVariable Long id) {
-		return schoolService.getSchool(id);
+		
+		SchoolEntity school=	schoolService.getSchool(id);
+		
+		logger.info("controller selected school details with id:::::::::::"+id );
+		return school;
 	}
 
 	@ApiOperation(value = "Create a new school", nickname = "CreateSchool")
 	@PostMapping(value = "/schools", headers = "Accept=application/json", produces = "application/json")
 	private ResponseEntity<SchoolEntity> saveSchool(@RequestBody SchoolEntity school) {
-		return new ResponseEntity<SchoolEntity>(schoolService.saveSchool(school), HttpStatus.OK);
+		SchoolEntity schoolobj=schoolService.saveSchool(school);
+		logger.info("controller school saved sucessfully::::::::::::::::::" );
+		return new ResponseEntity<SchoolEntity>(schoolobj, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Update/Create a  school", nickname = "UpdateOrCreateSchool")
 	@PutMapping("/schools/{id}")
 	SchoolEntity updateSchool(@RequestBody SchoolEntity newSchool, @PathVariable Long id) {
-		return schoolService.replaceEmployee(newSchool, id);
+		
+		SchoolEntity schoolobj1=schoolService.updatedSchool(newSchool, id);
+		logger.info("controller school updated with id:::::::::::"+id );
+		
+		return schoolobj1;
 	}
 
 	@ApiOperation(value = "Delete a  school", nickname = "DeleteSchool")
 	@DeleteMapping("/schools/{id}")
 	void deleteSchool(@PathVariable Long id) {
-		schoolService.deleteEmployee(id);
+		logger.info("controller school deleted with id:::::::::::"+id );
+		schoolService.deleteschool(id);
 	}
 
 }

@@ -88,6 +88,8 @@ CREATE TABLE `user` (
   `ROLES` varchar(100) NOT NULL,
   `PERMISSIONS` varchar(100) NOT NULL,
   `DOB` datetime NOT NULL,
+  `joiningDate` datetime NOT NULL,
+  `endingDate` datetime NULL,
   `created_date` datetime NOT NULL,
   `created_user` varchar(45) NOT NULL,
   `last_updated_date` datetime NOT NULL,
@@ -102,3 +104,46 @@ CREATE TABLE `user` (
   CONSTRAINT `CATEGORYIDX` FOREIGN KEY (`CATEGORYID`) REFERENCES `cmvalue` (`ID`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `SCHOOLIDX` FOREIGN KEY (`SCHOOLID`) REFERENCES `school` (`ID`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `userclass` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created_user` varchar(255) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `last_updated_user` varchar(255) DEFAULT NULL,
+  `last_updated_date` datetime DEFAULT NULL,
+  `academicyear` varchar(255) DEFAULT NULL,
+  `classid` int DEFAULT NULL,
+  `isactive` bit(1) DEFAULT NULL,
+  `sectionid` int DEFAULT NULL,
+  `userid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKbkw8gvfqltclm8kquj7cfxs03` (`classid`),
+  KEY `FKc23o966yy1sqbmxvsp0lue5xm` (`sectionid`),
+  KEY `FKp892caelskg4ug9krrqgx43qp` (`userid`),
+  CONSTRAINT `FKbkw8gvfqltclm8kquj7cfxs03` FOREIGN KEY (`classid`) REFERENCES `cmvalue` (`ID`),
+  CONSTRAINT `FKc23o966yy1sqbmxvsp0lue5xm` FOREIGN KEY (`sectionid`) REFERENCES `cmvalue` (`ID`),
+  CONSTRAINT `FKp892caelskg4ug9krrqgx43qp` FOREIGN KEY (`userid`) REFERENCES `user` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `classteachersubject` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created_user` varchar(255) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `last_updated_user` varchar(255) DEFAULT NULL,
+  `last_updated_date` datetime DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `isactive` bit(1) DEFAULT NULL,
+  `classid` int DEFAULT NULL,
+  `teacheruserid` int DEFAULT NULL,
+  `subjectid` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKhw349jnhku1o6hlc9ex3mniol` (`subjectid`),
+  KEY `FKm5fks0mpv7tuymkuifbt5yb7g` (`teacheruserid`),
+  KEY `FK8mffa7fub0b9uw6swmv88l97q` (`classid`),
+  CONSTRAINT `FKhw349jnhku1o6hlc9ex3mniol` FOREIGN KEY (`subjectid`) REFERENCES `cmvalue` (`ID`),
+  CONSTRAINT `FKm5fks0mpv7tuymkuifbt5yb7g` FOREIGN KEY (`teacheruserid`) REFERENCES `user` (`ID`),
+  CONSTRAINT `FK8mffa7fub0b9uw6swmv88l97q` FOREIGN KEY (`classid`) REFERENCES `cmvalue` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
