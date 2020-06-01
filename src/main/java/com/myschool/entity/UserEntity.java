@@ -19,9 +19,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -103,9 +100,6 @@ public class UserEntity extends AuditingEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "ADDRESSID")
 	private AddressEntity address;
-
-	@Transient
-	private MultipartFile file;
 
 	public List<String> getRolesList() {
 		if (this.roles.length() > 0) {
@@ -249,14 +243,6 @@ public class UserEntity extends AuditingEntity {
 		this.endingDate = endingDate;
 	}
 
-	public MultipartFile getFile() {
-		return file;
-	}
-
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
-
 	public Long getSchoolId() {
 		return schoolId;
 	}
@@ -296,8 +282,5 @@ public class UserEntity extends AuditingEntity {
 	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
-
-
-	
 
 }
