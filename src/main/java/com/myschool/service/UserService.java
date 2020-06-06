@@ -2,19 +2,24 @@ package com.myschool.service;
 
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myschool.entity.UserEntity;
 import com.myschool.exceptions.SchoolNotFoundException;
 import com.myschool.repository.UserRepository;
+import com.myschool.utils.UserServiceUtils;
 
 @Service
+@Transactional
 public class UserService {
 
 	private static final Logger logger = LogManager.getLogger(UserService.class);
@@ -24,7 +29,10 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
+	@Autowired
+	private UserServiceUtils UserServiceUtils;
+
 	public List<UserEntity> getUsers() {
 		logger.info("service list of users::::::::::::::");
 		return userRepo.findAll();
@@ -62,10 +70,6 @@ public class UserService {
 			user.setCategoryId(newUser.getCategoryId());
 			user.setCreatedBy(newUser.getCreatedBy());
 			user.setCreatedDate(newUser.getCreatedDate());
-			
-
-			
-			
 			user.setAddress(newUser.getAddress());
 			return userRepo.save(user);
 		}).orElseGet(() -> {
@@ -83,4 +87,20 @@ public class UserService {
 		logger.info("service total no of users ::::::::::" + count);
 		return count;
 	}
+
+	@Transactional
+	public boolean saveDatafromUploadedfile(MultipartFile file) {
+		boolean isFlag = false;
+		String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+		if (extension.equalsIgnoreCase("json")) {
+			isFlag = UserServiceUtils.readDataFromJson(file);
+		} else if (extension.equalsIgnoreCase("xlsx") || extension.equalsIgnoreCase("xls")) {
+			isFlag = UserServiceUtils.readDataFromExecl(file);
+		} /*
+			 * else if(extension.equalsIgnoreCase("csv")) {
+			 * isFlag=UserServiceUtils.readDataFromCSV(file); }
+			 */
+		return isFlag;
+	}
+
 }

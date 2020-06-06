@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myschool.entity.UserEntity;
 import com.myschool.service.UserService;
@@ -31,7 +33,6 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin
 public class UserController {
 
-	
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 
 	@Autowired
@@ -52,7 +53,7 @@ public class UserController {
 	@ApiOperation(value = "View a user", response = Iterable.class)
 	@GetMapping("/users/{id}")
 	UserEntity getUser(@PathVariable Long id) {
-		logger.info("controller get user with id::::::::::::"+id);
+		logger.info("controller get user with id::::::::::::" + id);
 		return userService.getUser(id);
 	}
 
@@ -66,17 +67,31 @@ public class UserController {
 	@ApiOperation(value = "Update/Create a  user", nickname = "UpdateOrCreateUser")
 	@PutMapping("/users/{id}")
 	UserEntity updateUser(@RequestBody UserEntity newUser, @PathVariable Long id) {
-		logger.info("controller user updated with id :::::::::::"+id);
+		logger.info("controller user updated with id :::::::::::" + id);
 		return userService.updateUser(newUser, id);
 	}
 
 	@ApiOperation(value = "Delete a user", nickname = "Delete User")
 	@DeleteMapping("/users/{id}")
 	void deleteUser(@PathVariable Long id) {
-		logger.info("controller user daleted with id :::::::::"+id);
+		logger.info("controller user daleted with id :::::::::" + id);
 		userService.deleteUser(id);
 	}
-	
-	
-	
+
+	@ApiOperation(value = "fileupload to save user data", nickname = "fileupload to save user data")
+	@PostMapping(value = "/users/fileupload")
+	public ResponseEntity<String> uploadFile(@RequestParam MultipartFile file
+			/* @ModelAttribute UserEntity userentity */) {
+		boolean isFlag = userService.saveDatafromUploadedfile(file);
+		String msg;
+		if (isFlag) {
+			msg = "file uploaded successfully";
+			return new ResponseEntity<String>(msg, HttpStatus.OK);
+		} else {
+			msg = "file uploaded not done,please try again";
+			return new ResponseEntity<String>(msg, HttpStatus.EXPECTATION_FAILED);
+		}
+
+	}
+
 }
