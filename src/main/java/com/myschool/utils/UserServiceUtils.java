@@ -123,6 +123,9 @@ public class UserServiceUtils {
 			if (row.getCell(14).getCellType() == CellType.NUMERIC) {
 				user.setEndingDate(row.getCell(14).getDateCellValue());
 			}
+			if (row.getCell(23).getCellType() == CellType.NUMERIC) {
+				user.setGenderId((long) row.getCell(23).getNumericCellValue());
+			}
 			
 			AddressEntity address = new AddressEntity();
 			

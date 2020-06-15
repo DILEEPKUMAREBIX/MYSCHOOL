@@ -48,7 +48,7 @@ public class UserEntity extends AuditingEntity {
 
 	@Column(name = "MOTHERNAME")
 	private String motherName;
-
+	
 	@Column(name = "IMAGE")
 	@Lob
 	private Blob image;
@@ -96,6 +96,13 @@ public class UserEntity extends AuditingEntity {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CATEGORYID", insertable = false, updatable = false)
 	private CMValueEntity category;
+	
+	@Column(name = "GENDERID")
+	private Long genderId;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "GENDERID", insertable = false, updatable = false)
+	private CMValueEntity gender;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "ADDRESSID")
@@ -282,5 +289,22 @@ public class UserEntity extends AuditingEntity {
 	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
+
+	public Long getGenderId() {
+		return genderId;
+	}
+
+	public void setGenderId(Long genderId) {
+		this.genderId = genderId;
+	}
+
+	public CMValueEntity getGender() {
+		return gender;
+	}
+
+	public void setGender(CMValueEntity gender) {
+		this.gender = gender;
+	}
+	
 
 }

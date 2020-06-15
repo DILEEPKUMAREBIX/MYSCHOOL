@@ -79,7 +79,7 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "fileupload to save user data", nickname = "fileupload to save user data")
-	@PostMapping(value = "/users/fileupload")
+	@PostMapping(value = "/users/usersupload")
 	public ResponseEntity<String> uploadFile(@RequestParam MultipartFile file
 			/* @ModelAttribute UserEntity userentity */) {
 		boolean isFlag = userService.saveDatafromUploadedfile(file);
