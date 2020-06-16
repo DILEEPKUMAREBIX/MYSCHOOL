@@ -62,6 +62,7 @@ public class UserService {
 			user.setEmail(newUser.getEmail());
 			user.setPhone(newUser.getPhone());
 			user.setRoles(newUser.getRoles());
+			user.setGenderId(newUser.getGenderId());
 			user.setPermissions(newUser.getPermissions());
 			user.setDateOfBirth(newUser.getDateOfBirth());
 			user.setJoiningDate(newUser.getJoiningDate());

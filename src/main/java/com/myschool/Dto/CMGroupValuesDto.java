@@ -9,15 +9,15 @@ public class CMGroupValuesDto implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Long CmGroupId;
-	String CmGroupName;
-	String CmGroupDescription;
-	Long groupId;
+	private Long CmGroupId;
+	private String CmGroupName;
+	private String CmGroupDescription;
+	private Long groupId;
 
-	Long id;
-	String name;
-	String description;
-	boolean isActive;
+	private Long id;
+	private String name;
+	private String description;
+	private boolean isActive;
 
 	public CMGroupValuesDto() {
 	}
