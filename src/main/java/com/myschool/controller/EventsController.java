@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +23,29 @@ import io.swagger.annotations.Api;
 @CrossOrigin
 public class EventsController {
 	
-	@Autowired
+
+@Autowired
 	private EventsService eventservice;
 	
-	 @PostMapping("/uploadFile")
-	    public ResponseEntity<List<String>>  uploadFile(@RequestParam(value = "file") MultipartFile[] files) {
-	        return new ResponseEntity<List<String>>( eventservice.uploadFile(files),HttpStatus.OK);
-	    }
+	 @SuppressWarnings("unused")
+	@PostMapping("/uploadFile")
+	    public ResponseEntity<String>  uploadFile(@RequestParam(value = "file") MultipartFile[] files) {
+	String msg="";
+	boolean	isFlag= eventservice.uploadFile(files);
+	if(isFlag=true) {
+		  msg="files uploaded successfully";
+		 return new ResponseEntity<String>(msg ,HttpStatus.OK);
+	}else {
+		 msg="files not uploaded";
+		 return new ResponseEntity<String>(msg ,HttpStatus.EXPECTATION_FAILED);
+	}
 
+		
+	        
+	    }
+	 
+	 @GetMapping("/allfiles")
+	 public ResponseEntity<List<String>> listAllFiles(){
+	   return new ResponseEntity<List<String>>( eventservice.listFiles(),HttpStatus.OK);
+	 }
 }
