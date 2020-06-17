@@ -25,10 +25,10 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 public class EventsService {
 
 
-	@Value("${aws-s3.Consolelink}")
+	@Value("${aws.Consolelink}")
 	private String endpointUrl;
 
-	@Value("${aws-s3.bucket}")
+	@Value("${aws.bucket}")
 	private String bucketName;
 
 	@Autowired
