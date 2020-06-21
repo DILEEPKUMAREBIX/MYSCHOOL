@@ -71,15 +71,15 @@ public class UserEntity extends AuditingEntity {
 	@Column(name = "PERMISSIONS")
 	private String permissions;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
 	private Date dateOfBirth;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "JOININGDATE")
 	private Date joiningDate;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "ENDINGDATE",nullable = true)
 	private Date endingDate;
 	

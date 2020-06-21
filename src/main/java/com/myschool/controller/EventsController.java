@@ -7,12 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myschool.entity.EventsEntity;
 import com.myschool.service.EventsService;
 
 import io.swagger.annotations.Api;
@@ -22,30 +25,37 @@ import io.swagger.annotations.Api;
 @RequestMapping("/myschool")
 @CrossOrigin
 public class EventsController {
-	
 
-@Autowired
+
+	@Autowired
 	private EventsService eventservice;
-	
-	 @SuppressWarnings("unused")
+
+	@SuppressWarnings("unused")
 	@PostMapping("/uploadFile")
-	    public ResponseEntity<String>  uploadFile(@RequestParam(value = "file") MultipartFile[] files) {
-	String msg="";
-	boolean	isFlag= eventservice.uploadFile(files);
-	if(isFlag=true) {
-		  msg="files uploaded successfully";
-		 return new ResponseEntity<String>(msg ,HttpStatus.OK);
-	}else {
-		 msg="files not uploaded";
-		 return new ResponseEntity<String>(msg ,HttpStatus.EXPECTATION_FAILED);
+	public ResponseEntity<String>  uploadFile(
+			@RequestParam String foldername,
+			@RequestParam(value = "file") MultipartFile[] files) {
+		
+		
+		String msg="";
+		boolean	isFlag= eventservice.uploadFile(files,foldername);
+		if(isFlag=true) {
+			msg="files uploaded successfully";
+			return new ResponseEntity<String>(msg ,HttpStatus.OK);
+		}else {
+			msg="files not uploaded";
+			return new ResponseEntity<String>(msg ,HttpStatus.EXPECTATION_FAILED);
+		}
 	}
 
-		
-	        
-	    }
-	 
-	 @GetMapping("/allfiles")
-	 public ResponseEntity<List<String>> listAllFiles(){
-	   return new ResponseEntity<List<String>>( eventservice.listFiles(),HttpStatus.OK);
-	 }
+	@GetMapping("/allfiles/{foldername}")
+	public ResponseEntity<List<String>> listAllFiles(
+			@PathVariable String foldername){
+		return new ResponseEntity<List<String>>( eventservice.getAllFilesInFolder(foldername),HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/createfolder")
+	public  ResponseEntity<String> createFolder(@RequestBody EventsEntity newevent){
+		return new  ResponseEntity<String>(eventservice.createFolder(newevent),HttpStatus.OK);
+	}
 }
