@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -39,17 +40,16 @@ public class EventsService {
 
 	@Autowired
 	private AmazonS3 s3client;
-	
+
 	@Autowired
 	EventsService eventsservice;
-	
+
 	@Autowired
 	EventsRepository eventsrepo;
 
 	@Transactional
 	public boolean uploadFile(MultipartFile[] Files,String foldername) {
-		
-	
+
 		boolean isFlag=true;
 		for(MultipartFile file:Files) {
 			try {
@@ -61,37 +61,42 @@ public class EventsService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 		return isFlag;
 	}
 
+
 	public List<String> getAllFilesInFolder(String foldername) {
-	    if (!SUFFIX.endsWith(SUFFIX)) {
-        	SUFFIX += SUFFIX;
-        }
-        List<String> keys = new ArrayList<String>();
-        ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
-                .withBucketName(bucketName).withPrefix(foldername+SUFFIX);
-        
-        ObjectListing objects = s3client.listObjects(listObjectsRequest); 
-        for (;;) {
-       	  List<S3ObjectSummary> summaries = objects.getObjectSummaries();
-       	  if
-       	  (summaries.size() < 1) {
-       		  break;
-       		  } summaries.forEach(s ->
-       	 keys.add(s.getKey())); objects = s3client.listNextBatchOfObjects(objects); }
-        keys.remove(0);
-       	 return keys;    
-		
-    }
-	
-	
+		String filrUrl="";
+		if (!SUFFIX.endsWith(SUFFIX)) {
+			SUFFIX += SUFFIX;
+		}
+		List<String> keys = new ArrayList<>();
+		List<String> fileurls = new ArrayList<>();
+		ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
+				.withBucketName(bucketName).withPrefix(foldername+SUFFIX);
+
+		ObjectListing objects = s3client.listObjects(listObjectsRequest); 
+		for (;;) {
+			List<S3ObjectSummary> summaries = objects.getObjectSummaries();
+			if
+			(summaries.size() < 1) {
+				break;
+			} summaries.forEach(s ->
+			keys.add(s.getKey())); objects = s3client.listNextBatchOfObjects(objects); }
+		for(String key:keys) {
+			filrUrl=endpointUrl+SUFFIX+bucketName+SUFFIX+key;
+			fileurls.add(filrUrl);
+		}
+		fileurls.remove(0);
+		return fileurls;    
+	}
+
+
 	public String createFolder(EventsEntity newevent) {
-		
+
 		String foldername=newevent.getSchoolIdno()+newevent.getEventName()+newevent.getClassId();
-		
+
 		EventsEntity event=new EventsEntity();
 		event.setSchoolIdno(newevent.getSchoolIdno());
 		event.setClassId(newevent.getClassId());
@@ -101,22 +106,18 @@ public class EventsService {
 		eventsrepo.save(event);
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(0);
-
 		// create empty content
 		InputStream emptyContent = new ByteArrayInputStream(new byte[0]);
-
 		// create a PutObjectRequest passing the folder name suffixed by /
 		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,
 				foldername + SUFFIX, emptyContent, metadata);
-
 		// send request to S3 to create folder
 		s3client.putObject(putObjectRequest);
 		return foldername;
 	}
-	
-	
+
+
 	public void saveEventDetails(Long schoolid,Long classid,String eventname) {
-		
 		String foldername=schoolid+eventname+classid;
 		EventsEntity event=new EventsEntity();
 		event.setSchoolIdno(schoolid);
@@ -124,9 +125,8 @@ public class EventsService {
 		event.setEventName(eventname);
 		event.setFoldername(foldername);
 		eventsrepo.save(event);
-		
 	}
-	
+
 	private File convertMultiPartToFile(MultipartFile file) throws IOException {
 		File convFile = new File(file.getOriginalFilename());
 		FileOutputStream fos = new FileOutputStream(convFile);
@@ -143,11 +143,19 @@ public class EventsService {
 		s3client.putObject(new PutObjectRequest(bucketName, fileName, file)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
 	}
-	
-	
-	/*
-	 * public String deleteFileFromS3Bucket(String fileUrl) { String fileName =
-	 * fileUrl.substring(fileUrl.lastIndexOf("/") + 1); s3client.deleteObject(new
-	 * DeleteObjectRequest(bucketName, fileName)); return "Successfully deleted"; }
-	 */
+
+	public String deleteFileFromFolder(String filename,String foldername) { 
+		String bucket=bucketName+SUFFIX+foldername;
+		//String fileName =fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+		s3client.deleteObject(new DeleteObjectRequest(bucket, filename)); 
+		return "Deleted file name :"+filename;
+	}
+
+	public String deleteFolder( String folderName) {
+		for (S3ObjectSummary listOfFolders : s3client.listObjects(bucketName,folderName).getObjectSummaries()){
+			s3client.deleteObject(bucketName, listOfFolders.getKey());
+		}
+		return "Deleted folder name :"+folderName;
+	}
+
 }
