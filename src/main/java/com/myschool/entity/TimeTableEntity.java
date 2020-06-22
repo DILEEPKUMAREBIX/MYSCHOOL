@@ -28,8 +28,6 @@ public class TimeTableEntity extends AuditingEntity{
 	@Column(name="PERIODNO")
 	private Long periodNo;
 	
-	
-	
 	@Column(name="CLASSTEACHERSUBJECTID")
 	private Long classTeachersubjectId;
 	

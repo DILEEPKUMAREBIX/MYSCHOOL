@@ -22,7 +22,7 @@ public class SchoolService {
 	private SchoolRepository schoolRepo;
 
 	public List<SchoolEntity> getSchools() {
-		logger.info("controller list of schools :::::::::::");
+		logger.info("service list of schools :::::::::::");
 		return schoolRepo.findAll();
 	}
 

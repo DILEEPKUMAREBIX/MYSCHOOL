@@ -41,7 +41,7 @@ public class SchoolEntity extends AuditingEntity {
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "ANNIVERSARY")
 	private Date anniversary;
 
