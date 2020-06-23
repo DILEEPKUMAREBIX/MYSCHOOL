@@ -70,6 +70,15 @@ public class UserEntity extends AuditingEntity {
 
 	@Column(name = "PERMISSIONS")
 	private String permissions;
+	
+	@Column(name = "CASTE")
+	private String caste;
+	
+	@Column(name = "RELIGION")
+	private String religion;
+	
+	@Column(name = "ID_PROOF")
+	private String idProof;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
@@ -305,6 +314,32 @@ public class UserEntity extends AuditingEntity {
 	public void setGender(CMValueEntity gender) {
 		this.gender = gender;
 	}
+
+	public String getCaste() {
+		return caste;
+	}
+
+	public void setCaste(String caste) {
+		this.caste = caste;
+	}
+
+	public String getReligion() {
+		return religion;
+	}
+
+	public void setReligion(String religion) {
+		this.religion = religion;
+	}
+
+	public String getIdProof() {
+		return idProof;
+	}
+
+	public void setIdProof(String idProof) {
+		this.idProof = idProof;
+	}
+	
+	
 	
 
 }

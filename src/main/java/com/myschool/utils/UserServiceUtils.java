@@ -126,7 +126,15 @@ public class UserServiceUtils {
 			if (row.getCell(23).getCellType() == CellType.NUMERIC) {
 				user.setGenderId((long) row.getCell(23).getNumericCellValue());
 			}
-			
+			if (row.getCell(24).getCellType() == CellType.STRING) {
+				user.setCaste( row.getCell(24).getStringCellValue());
+			}
+			if (row.getCell(25).getCellType() == CellType.STRING) {
+				user.setReligion( row.getCell(23).getStringCellValue());
+			}
+			if (row.getCell(23).getCellType() == CellType.STRING) {
+				user.setIdProof( row.getCell(23).getStringCellValue());
+			}
 			AddressEntity address = new AddressEntity();
 			
 			if (row.getCell(15).getCellType() == CellType.STRING) {
