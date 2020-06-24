@@ -29,7 +29,7 @@ public class HolidaysEntity extends AuditingEntity{
 	private Date holidayDate;
 	
 	@Column(name = "DESCRIPTION")
-	private  String Description;
+	private  String description;
 	
 	@Column(name = "IS_ACTIVE")
 	private Boolean isActive;
@@ -58,11 +58,11 @@ public class HolidaysEntity extends AuditingEntity{
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
 	public Long getSchoolIdno() {

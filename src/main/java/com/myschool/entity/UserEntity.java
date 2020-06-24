@@ -71,13 +71,7 @@ public class UserEntity extends AuditingEntity {
 	@Column(name = "PERMISSIONS")
 	private String permissions;
 	
-	@Column(name = "CASTE")
-	private String caste;
-	
-	@Column(name = "RELIGION")
-	private String religion;
-	
-	@Column(name = "ID_PROOF")
+	@Column(name = "IDPROOF")
 	private String idProof;
 
 	@Temporal(TemporalType.DATE)
@@ -112,6 +106,21 @@ public class UserEntity extends AuditingEntity {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "GENDERID", insertable = false, updatable = false)
 	private CMValueEntity gender;
+	
+	@Column(name = "RELIGIONID")
+	private Long religionId;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "RELIGION_ID", insertable = false, updatable = false)
+	private CMValueEntity religion;
+	
+	@Column(name = "CASTEID")
+	private Long casteId;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "CASTE_ID", insertable = false, updatable = false)
+	private CMValueEntity caste;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "ADDRESSID")
@@ -235,6 +244,14 @@ public class UserEntity extends AuditingEntity {
 		this.permissions = permissions;
 	}
 
+	public String getIdProof() {
+		return idProof;
+	}
+
+	public void setIdProof(String idProof) {
+		this.idProof = idProof;
+	}
+
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -291,14 +308,6 @@ public class UserEntity extends AuditingEntity {
 		this.category = category;
 	}
 
-	public AddressEntity getAddress() {
-		return address;
-	}
-
-	public void setAddress(AddressEntity address) {
-		this.address = address;
-	}
-
 	public Long getGenderId() {
 		return genderId;
 	}
@@ -315,31 +324,44 @@ public class UserEntity extends AuditingEntity {
 		this.gender = gender;
 	}
 
-	public String getCaste() {
-		return caste;
+	public Long getReligionId() {
+		return religionId;
 	}
 
-	public void setCaste(String caste) {
-		this.caste = caste;
+	public void setReligionId(Long religionId) {
+		this.religionId = religionId;
 	}
 
-	public String getReligion() {
+	public CMValueEntity getReligion() {
 		return religion;
 	}
 
-	public void setReligion(String religion) {
+	public void setReligion(CMValueEntity religion) {
 		this.religion = religion;
 	}
 
-	public String getIdProof() {
-		return idProof;
+	public Long getCasteId() {
+		return casteId;
 	}
 
-	public void setIdProof(String idProof) {
-		this.idProof = idProof;
+	public void setCasteId(Long casteId) {
+		this.casteId = casteId;
 	}
-	
-	
-	
+
+	public CMValueEntity getCaste() {
+		return caste;
+	}
+
+	public void setCaste(CMValueEntity caste) {
+		this.caste = caste;
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
 
 }
