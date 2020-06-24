@@ -68,8 +68,8 @@ public class UserService {
 			user.setEndingDate(newUser.getEndingDate());
 			user.setSchoolId(newUser.getSchoolId());
 			user.setCategoryId(newUser.getCategoryId());
-			user.setCaste(newUser.getCaste());
-			user.setReligion(newUser.getReligion());
+			user.setCasteId(newUser.getCasteId());
+			user.setReligionId(newUser.getReligionId());
 			user.setIdProof(newUser.getIdProof());
 			user.setCreatedBy(newUser.getCreatedBy());
 			user.setCreatedDate(newUser.getCreatedDate());
