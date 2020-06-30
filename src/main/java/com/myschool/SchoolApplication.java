@@ -1,4 +1,3 @@
-
 package com.myschool;
 
 import org.springframework.boot.SpringApplication;

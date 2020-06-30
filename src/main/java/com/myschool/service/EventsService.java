@@ -95,15 +95,8 @@ public class EventsService {
 
 	public String createFolder(EventsEntity newevent) {
 
-		String foldername=newevent.getSchoolIdno()+newevent.getEventName()+newevent.getClassId();
-
-		EventsEntity event=new EventsEntity();
-		event.setSchoolIdno(newevent.getSchoolIdno());
-		event.setClassId(newevent.getClassId());
-		event.setEventName(newevent.getEventName());
-		event.setEventDate(newevent.getEventDate());
-		event.setFoldername(foldername);
-		eventsrepo.save(event);
+		String foldername=eventsservice.saveEventDetails(newevent);
+		
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(0);
 		// create empty content
@@ -117,14 +110,22 @@ public class EventsService {
 	}
 
 
-	public void saveEventDetails(Long schoolid,Long classid,String eventname) {
-		String foldername=schoolid+eventname+classid;
+	public String saveEventDetails(EventsEntity newevent) {
+		String foldername=
+				
+				
+				newevent.getSchoolIdno()+"."
+				+newevent.getClassId()+"."+newevent.getSectionId()+"."+newevent.getEventName();
+
 		EventsEntity event=new EventsEntity();
-		event.setSchoolIdno(schoolid);
-		event.setClassId(classid);
-		event.setEventName(eventname);
+		event.setSchoolIdno(newevent.getSchoolIdno());
+		event.setClassId(newevent.getClassId());
+		event.setSectionId(newevent.getSectionId());
+		event.setEventName(newevent.getEventName());
+		event.setEventDate(newevent.getEventDate());
 		event.setFoldername(foldername);
 		eventsrepo.save(event);
+		return foldername;
 	}
 
 	private File convertMultiPartToFile(MultipartFile file) throws IOException {
@@ -148,14 +149,23 @@ public class EventsService {
 		String bucket=bucketName+SUFFIX+foldername;
 		//String fileName =fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
 		s3client.deleteObject(new DeleteObjectRequest(bucket, filename)); 
+		System.out.println("image deleted");
 		return "Deleted file name :"+filename;
 	}
 
-	public String deleteFolder( String folderName) {
-		for (S3ObjectSummary listOfFolders : s3client.listObjects(bucketName,folderName).getObjectSummaries()){
+	public String deleteFolder( String foldername) {
+		//EventsEntity event=eventsrepo.findByFolderName(foldername);
+	//	eventsrepo.deleteById(event.getEventId());
+		for (S3ObjectSummary listOfFolders : s3client.listObjects(bucketName,foldername).getObjectSummaries()){
 			s3client.deleteObject(bucketName, listOfFolders.getKey());
 		}
-		return "Deleted folder name :"+folderName;
+		//+"with id :"+event.getEventId()
+		return "Deleted folder name :"+foldername ;
+	}
+
+
+	public List<EventsEntity> findAll() {
+		return eventsrepo.findAll();
 	}
 
 }

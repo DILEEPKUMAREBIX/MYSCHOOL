@@ -51,6 +51,13 @@ public class EventsEntity extends AuditingEntity{
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CLASSID", insertable = false, updatable = false) 
 	private CMValueEntity className;
+	
+	@Column(name = "SECTIONID")
+	private Long sectionId;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "SECTIONID", insertable = false, updatable = false) 
+	private CMValueEntity sectionName;
 
 	public Long getEventId() {
 		return eventId;
@@ -122,6 +129,22 @@ public class EventsEntity extends AuditingEntity{
 
 	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
+	}
+
+	public Long getSectionId() {
+		return sectionId;
+	}
+
+	public void setSectionId(Long sectionId) {
+		this.sectionId = sectionId;
+	}
+
+	public CMValueEntity getSectionName() {
+		return sectionName;
+	}
+
+	public void setSectionName(CMValueEntity sectionName) {
+		this.sectionName = sectionName;
 	}
 	
 	

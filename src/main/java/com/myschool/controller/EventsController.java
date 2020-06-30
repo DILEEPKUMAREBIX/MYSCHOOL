@@ -32,9 +32,9 @@ public class EventsController {
 	private EventsService eventservice;
 
 	@SuppressWarnings("unused")
-	@PostMapping("/uploadFile")
+	@PostMapping("/uploadFile/{foldername}")
 	public ResponseEntity<String>  uploadFile(
-			@RequestParam String foldername,
+			@PathVariable String foldername,
 			@RequestParam(value = "file") MultipartFile[] files) {
 		String msg="";
 		boolean	isFlag= eventservice.uploadFile(files,foldername);
@@ -48,8 +48,7 @@ public class EventsController {
 	}
 
 	@GetMapping("/allfiles/{foldername}")
-	public ResponseEntity<List<String>> listAllFiles(
-			@PathVariable String foldername){
+	public ResponseEntity<List<String>> listAllFiles(@PathVariable String foldername){
 		return new ResponseEntity<List<String>>( eventservice.getAllFilesInFolder(foldername),HttpStatus.OK);
 	}
 
@@ -68,5 +67,10 @@ public class EventsController {
 	public ResponseEntity<String> deleteFileFromFolder(@PathVariable String foldername,@PathVariable String filename){
 		return new ResponseEntity<String>(eventservice.deleteFileFromFolder(filename,foldername),HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("/allfolders")
+	public ResponseEntity<List<EventsEntity>> listAll(){
+		return new ResponseEntity<List<EventsEntity>>( eventservice.findAll(),HttpStatus.OK);
 	}
 }
