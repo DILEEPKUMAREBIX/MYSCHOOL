@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.myschool.entity.TimeTableEntity;
 import com.myschool.exceptions.SchoolNotFoundException;
@@ -37,17 +36,16 @@ public class TimeTableService {
 		return timetablerepo.save(timetable);
 	}
 
-	public TimeTableEntity updatedtimetable(@RequestBody TimeTableEntity newtimetable, @PathVariable Long id) {
-		logger.info("service timetable updated with id:::::::::::" + id);
-		return timetablerepo.findById(id).map(timetable -> {
-			timetable.setPeriodNo(newtimetable.getPeriodNo());;
-			return timetablerepo.save(timetable);
-
-		}).orElseGet(() -> {
-			return timetablerepo.save(newtimetable);
-		});
-	}
-
+	/*
+	 * public TimeTableEntity updatedtimetable(@RequestBody TimeTableEntity
+	 * newtimetable, @PathVariable Long id) {
+	 * logger.info("service timetable updated with id:::::::::::" + id); return
+	 * timetablerepo.findById(id).map(timetable -> {
+	 * timetable.setPeriodNo(newtimetable.getPeriodNo());; return
+	 * timetablerepo.save(timetable);
+	 * 
+	 * }).orElseGet(() -> { return timetablerepo.save(newtimetable); }); }
+	 */
 	public void deletetimetable(@PathVariable Long id) {
 		logger.info("service timetable deleted with id:::::::::::" + id);
 		timetablerepo.deleteById(id);

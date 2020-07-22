@@ -11,11 +11,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 @Entity
 @Table(name = "userclass", schema = "myschool")
-@Data
+//@Data
 public class UserClassEntity extends AuditingEntity {
 
 	@Id

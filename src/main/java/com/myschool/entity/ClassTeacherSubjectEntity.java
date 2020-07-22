@@ -11,11 +11,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 @Entity
 @Table(name = "classteachersubject", schema = "myschool")
-@Data
+//@Data
 public class ClassTeacherSubjectEntity extends AuditingEntity {
 
 	@Id
@@ -51,12 +50,12 @@ public class ClassTeacherSubjectEntity extends AuditingEntity {
 	@JoinColumn(name = "SUBJECTID", insertable = false, updatable = false)
 	private CMValueEntity Subject;
 
-	public Long getClassId() {
-		return classId;
+	public Long getClassTeacherSubjectId() {
+		return classTeacherSubjectId;
 	}
 
-	public void setClassId(Long classId) {
-		this.classId = classId;
+	public void setClassTeacherSubjectId(Long classTeacherSubjectId) {
+		this.classTeacherSubjectId = classTeacherSubjectId;
 	}
 
 	public String getYear() {
@@ -73,6 +72,14 @@ public class ClassTeacherSubjectEntity extends AuditingEntity {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public Long getClassId() {
+		return classId;
+	}
+
+	public void setClassId(Long classId) {
+		this.classId = classId;
 	}
 
 	public CMValueEntity getUserClassId() {
@@ -99,6 +106,14 @@ public class ClassTeacherSubjectEntity extends AuditingEntity {
 		this.classteacheruser = classteacheruser;
 	}
 
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
+	}
+
 	public CMValueEntity getSubject() {
 		return Subject;
 	}
@@ -107,20 +122,6 @@ public class ClassTeacherSubjectEntity extends AuditingEntity {
 		Subject = subject;
 	}
 
-	public Long getClassTeacherSubjectId() {
-		return classTeacherSubjectId;
-	}
 
-	public void setClassTeacherSubjectId(Long classTeacherSubjectId) {
-		this.classTeacherSubjectId = classTeacherSubjectId;
-	}
-
-	public Long getSubjectId() {
-		return subjectId;
-	}
-
-	public void setSubjectId(Long subjectId) {
-		this.subjectId = subjectId;
-	}
 
 }

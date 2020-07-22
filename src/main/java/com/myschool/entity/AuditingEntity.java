@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+//@Data
 public abstract class AuditingEntity {
 
 	@CreatedBy
@@ -68,4 +69,7 @@ public abstract class AuditingEntity {
 		this.modifiedDate = modifiedDate;
 	}
 
+	
+
+	
 }

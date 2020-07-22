@@ -6,7 +6,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.myschool.entity.UserEntity;
 import com.myschool.exceptions.SchoolNotFoundException;
 import com.myschool.repository.UserRepository;
+import com.myschool.utils.UserImageUtils;
 import com.myschool.utils.UserServiceUtils;
 
 @Service
@@ -27,11 +27,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepo;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
+	/*
+	 * @Autowired private PasswordEncoder passwordEncoder;
+	 */
 	@Autowired
 	private UserServiceUtils UserServiceUtils;
+
+	@SuppressWarnings("unused")
+	@Autowired
+	private UserImageUtils UserImageUtils;
 
 	public List<UserEntity> getUsers() {
 		logger.info("service list of users::::::::::::::");
@@ -43,10 +47,20 @@ public class UserService {
 		return userRepo.findById(id).orElseThrow(() -> new SchoolNotFoundException(id));
 	}
 
-	public UserEntity saveUser(UserEntity user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		return userRepo.save(user);
-	}
+	/*
+	 * public UserEntity saveUser(UserEntity user) throws Exception {
+	 * 
+	 * 
+	 * user.setPassword(passwordEncoder.encode(user.getPassword())); return
+	 * userRepo.save(user); }
+	 */
+
+	public UserEntity saveUser(String userString,MultipartFile file) throws Exception {
+		UserEntity user=UserServiceUtils.saveUserEntity(userString, file);
+				logger.info("service user saved sucessfully:::::::::::::");
+		return userRepo.save(user); 
+		}
+
 
 	public UserEntity updateUser(@RequestBody UserEntity newUser, @PathVariable Long id) {
 		logger.info("service user updated with id::::::::::" + id);
@@ -71,6 +85,7 @@ public class UserService {
 			user.setCasteId(newUser.getCasteId());
 			user.setReligionId(newUser.getReligionId());
 			user.setIdProof(newUser.getIdProof());
+			user.setIsActive(newUser.getIsActive());
 			user.setCreatedBy(newUser.getCreatedBy());
 			user.setCreatedDate(newUser.getCreatedDate());
 			user.setAddress(newUser.getAddress());
@@ -100,10 +115,16 @@ public class UserService {
 		} else if (extension.equalsIgnoreCase("xlsx") || extension.equalsIgnoreCase("xls")) {
 			isFlag = UserServiceUtils.readDataFromExecl(file);
 		} /*
-			 * else if(extension.equalsIgnoreCase("csv")) {
-			 * isFlag=UserServiceUtils.readDataFromCSV(file); }
-			 */
+		 * else if(extension.equalsIgnoreCase("csv")) {
+		 * isFlag=UserServiceUtils.readDataFromCSV(file); }
+		 */
 		return isFlag;
 	}
+
+	/*
+	 * private static byte[] toByteArray(Blob blob) { try { return blob.getBytes( 1,
+	 * (int) blob.length() ); } catch (SQLException e) { throw new RuntimeException(
+	 * "Error on transforming blob into array.", e ); } }
+	 */
 
 }

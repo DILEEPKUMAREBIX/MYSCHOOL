@@ -81,7 +81,7 @@ CREATE TABLE `user` (
   `FATHERNAME` varchar(45) NOT NULL,
   `MOTHERNAME` varchar(45) NOT NULL,
   `ADDRESSID` int NOT NULL,
-  `IMAGE` blob,
+  `IMAGE` LONGBLOB,
   `USERNAME` varchar(45) NOT NULL,
   `PASSWORD` varchar(255) NOT NULL,
   `EMAIL` varchar(100) DEFAULT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `userclass` (
   `last_updated_date` datetime DEFAULT NULL,
   `academicyear` varchar(255) DEFAULT NULL,
   `classid` int DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
+  `isactive` tinyint(1) DEFAULT NULL,
   `sectionid` int DEFAULT NULL,
   `userid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -145,7 +145,7 @@ CREATE TABLE `classteachersubject` (
   `last_updated_user` varchar(255) DEFAULT NULL,
   `last_updated_date` datetime DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
+  `isactive` tinyint(1) DEFAULT NULL,
   `classid` int DEFAULT NULL,
   `teacheruserid` int DEFAULT NULL,
   `subjectid` int DEFAULT NULL,
@@ -165,31 +165,20 @@ CREATE TABLE `attendance` (
   `last_updated_user` varchar(255) DEFAULT NULL,
   `last_updated_date` datetime DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-`ispresent` bit(1) DEFAULT NULL,
+  `isactive` tinyint(1) DEFAULT NULL,
+`ispresent` tinyint(1) DEFAULT NULL,
 `periodno` int DEFAULT NULL,
   `userclassid` int DEFAULT NULL,
   `classteachersubjectid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
    KEY `FK4v00uryomv5kg76fohfgaqb77` (`userclassid`),
   KEY `FK6gxd2aewy5ivrnn2v8qv66ocy` (`classteachersubjectid`),
+  KEY `FKeo5dgjn6yd4ikf7ie9ca842hi` (`periodno`),
    CONSTRAINT `FK4v00uryomv5kg76fohfgaqb77` FOREIGN KEY (`userclassid`) REFERENCES `userclass` (`ID`),
-  CONSTRAINT `FK6gxd2aewy5ivrnn2v8qv66ocy` FOREIGN KEY (`classteachersubjectid`) REFERENCES `classteachersubject` (`ID`)
+  CONSTRAINT `FK6gxd2aewy5ivrnn2v8qv66ocy` FOREIGN KEY (`classteachersubjectid`) REFERENCES `classteachersubject` (`ID`),
+  CONSTRAINT `FKeo5dgjn6yd4ikf7ie9ca842hi` FOREIGN KEY (`periodno`) REFERENCES `cmvalue` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `timetable` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `created_user` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `last_updated_user` varchar(255) DEFAULT NULL,
-  `last_updated_date` datetime DEFAULT NULL,
-    `isactive` bit(1) DEFAULT NULL,
-`periodno` int DEFAULT NULL,
-  `classteachersubjectid` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKekkjipn6jgr5w56a832aspu0g` (`classteachersubjectid`),
-  CONSTRAINT `FKekkjipn6jgr5w56a832aspu0g` FOREIGN KEY (`classteachersubjectid`) REFERENCES `classteachersubject` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE `schoolclassperiods` (
@@ -199,7 +188,7 @@ CREATE TABLE `schoolclassperiods` (
   `last_updated_user` varchar(255) DEFAULT NULL,
   `last_updated_date` datetime DEFAULT NULL,
   `count` int DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
+  `isactive` tinyint(1) DEFAULT NULL,
   `schoolid` int DEFAULT NULL,
   `classid` int DEFAULT NULL,
   `sectionid` int DEFAULT NULL,
@@ -216,7 +205,7 @@ CREATE TABLE `homework` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `DESCRIPTION` VARCHAR(1000) DEFAULT NULL,
   `HOMEWORK_DATE` DATETIME DEFAULT NULL,
-  `ISACTIVE` bit(1) DEFAULT NULL,
+  `ISACTIVE` tinyint(1) DEFAULT NULL,
   `SCHOOLID` INT DEFAULT NULL,
   `CLASSID` INT DEFAULT NULL,
   `SECTIONID` INT DEFAULT NULL,
@@ -242,7 +231,7 @@ CREATE TABLE `homework` (
   `FOLDER_NAME` VARCHAR(45) DEFAULT NULL,
   `EVENT_NAME` VARCHAR(45) DEFAULT NULL,
   `EVENT_DATE` DATETIME DEFAULT NULL,
-  `IS_ACTIVE` BIT(1) DEFAULT NULL,
+  `IS_ACTIVE` tinyint(1) DEFAULT NULL,
   `SCHOOLID` INT DEFAULT NULL,
   `CLASSID` INT DEFAULT NULL,
    `SECTIONID` INT DEFAULT NULL,
@@ -253,7 +242,7 @@ CREATE TABLE `homework` (
   PRIMARY KEY (`ID`),
   KEY `FKlw56q4gi1oxuvvpx7k7ef5ojk` (`SCHOOLID`),
   KEY `CLASSID_idx` (`CLASSID`),
-    KEY `SECTIONID_idx1` (`CLASSID`),
+    KEY `SECTIONID_idx1` (`SECTIONID`),
   CONSTRAINT `FKlw56q4gi1oxuvvpx7k7ef5ojk` FOREIGN KEY (`SCHOOLID`) REFERENCES `school` (`ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `CLASSIDidx` FOREIGN KEY (`CLASSID`) REFERENCES `cmvalue` (`ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SECTIONIDidx1` FOREIGN KEY (`SECTIONID`) REFERENCES `cmvalue` (`ID`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -263,7 +252,7 @@ CREATE TABLE `homework` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `HOLIDAY_DATE` DATETIME NULL,
   `DESCRIPTION` VARCHAR(45) NULL,
-  `IS_ACTIVE` BIT(1) NULL,
+  `IS_ACTIVE` tinyint(1) NULL,
   `SCHOOLID` INT NOT NULL,
    `created_date` datetime NOT NULL,
   `created_user` varchar(45) NOT NULL,
@@ -284,7 +273,7 @@ CREATE TABLE `leaves` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `LEAVE_DATE` DATETIME NULL,
   `DESCRIPTION` VARCHAR(1000) NULL,
-  `IS_ACTIVE` BIT(1) NULL,
+  `IS_ACTIVE` tinyint(1) NULL,
   `SCHOOLID` INT NOT NULL,
   `USERID` INT NOT NULL,
    `created_date` datetime NOT NULL,
@@ -302,6 +291,101 @@ CREATE TABLE `leaves` (
   CONSTRAINT `SCHOOLID_idx1`
     FOREIGN KEY (`SCHOOLID`)
     REFERENCES `school` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+CREATE TABLE `classperiod` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `STARTTIME` DATETIME DEFAULT NULL,
+  `ENDTIME` DATETIME DEFAULT NULL,
+  `ISACTIVE` tinyint(1) DEFAULT NULL,
+  `SCHOOLID` INT DEFAULT NULL,
+  `CLASSID` INT DEFAULT NULL,
+  `SECTIONID` INT DEFAULT NULL,
+   `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `SCHOOLID_idx2` (`SCHOOLID`),
+  KEY `CLASSID_idx2` (`CLASSID`),
+  KEY `SECTIONID_idx2` (`SECTIONID`),
+  CONSTRAINT `SCHOOLID_idx2`
+    FOREIGN KEY (`ID`)
+    REFERENCES `school` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `CLASSID_idx2`
+    FOREIGN KEY (`ID`)
+    REFERENCES `cmvalue` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `SECTIONID_idx2`
+    FOREIGN KEY (`ID`)
+    REFERENCES `cmvalue` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+-- classperiod table query end
+
+
+-- timetable table query start
+CREATE TABLE `timetable` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `STARTDATE` DATETIME DEFAULT NULL,
+  `ENDDATE` DATETIME NULL,
+  `ISACTIVE` tinyint(1) DEFAULT NULL,
+  `SCHOOLID` INT DEFAULT NULL,
+  `CLASSID` INT DEFAULT NULL,
+  `SECTIONID` INT DEFAULT NULL,
+  `SUBJECTID` INT DEFAULT NULL,
+  `CLASSPERIODID` INT DEFAULT NULL,
+  `CLASSTTEACHERSUBJECTID` INT DEFAULT NULL,
+   `created_date` datetime NOT NULL,
+  `created_user` varchar(45) NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `last_updated_user` varchar(45) NOT NULL,
+   KEY `SCHOOLID_idx3` (`SCHOOLID`),
+  KEY `CLASSID_idx3` (`CLASSID`),
+  KEY `SECTIONID_idx3` (`SECTIONID`),
+   KEY `SUBJECTID_idx3` (`SUBJECTID`),
+  KEY `CLASSPERIODID_idx3` (`CLASSPERIODID`),
+  KEY `CLASSTTEACHERSUBJECTID_idx3` (`CLASSTTEACHERSUBJECTID`),
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `SCHOOLID_idx3`
+    FOREIGN KEY (`ID`)
+    REFERENCES `school` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `CLASSID_idx3`
+    FOREIGN KEY (`ID`)
+    REFERENCES `cmvalue` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `SECTIONID_idx3`
+    FOREIGN KEY (`ID`)
+    REFERENCES `cmvalue` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `SUBJECTID_idx3`
+    FOREIGN KEY (`ID`)
+    REFERENCES `cmvalue` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+      CONSTRAINT `CLASSPERIODID_idx3`
+    FOREIGN KEY (`ID`)
+    REFERENCES `classperiod` (`ID`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `CLASSTTEACHERSUBJECTID_idx3`
+    FOREIGN KEY (`ID`)
+    REFERENCES `classteachersubject` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB

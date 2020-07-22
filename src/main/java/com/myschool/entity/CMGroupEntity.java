@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cmgroup", schema = "myschool")
+//@Data
 public class CMGroupEntity extends AuditingEntity{
 	
 	

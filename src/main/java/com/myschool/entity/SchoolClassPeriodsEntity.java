@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "schoolclassperiods", schema = "myschool")
+//@Data
 public class SchoolClassPeriodsEntity extends AuditingEntity{
 
 	@Id

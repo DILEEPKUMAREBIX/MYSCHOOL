@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -65,16 +64,18 @@ public class TimeTableController {
 		return new ResponseEntity<TimeTableEntity>(timetableobj, HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "Update/Create a  timetable", nickname = "UpdateOrCreatetimetable")
-	@PutMapping("/timetables/{id}")
-	TimeTableEntity updatetimetable(@RequestBody TimeTableEntity newtimetable, @PathVariable Long id) {
-		
-		TimeTableEntity timetableobj1=timetableservice.updatedtimetable(newtimetable, id);
-		logger.info("controller timetable updated with id:::::::::::"+id );
-		
-		return timetableobj1;
-	}
-
+	/*
+	 * @ApiOperation(value = "Update/Create a  timetable", nickname =
+	 * "UpdateOrCreatetimetable")
+	 * 
+	 * @PutMapping("/timetables/{id}") TimeTableEntity updatetimetable(@RequestBody
+	 * TimeTableEntity newtimetable, @PathVariable Long id) {
+	 * 
+	 * TimeTableEntity timetableobj1=timetableservice.updatedtimetable(newtimetable,
+	 * id); logger.info("controller timetable updated with id:::::::::::"+id );
+	 * 
+	 * return timetableobj1; }
+	 */
 	@ApiOperation(value = "Delete a  timetable", nickname = "Deletetimetable")
 	@DeleteMapping("/timetables/{id}")
 	void deletetimetable(@PathVariable Long id) {
