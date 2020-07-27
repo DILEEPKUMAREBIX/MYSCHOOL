@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,13 +58,25 @@ public class UserController {
 		return userService.getUser(id);
 	}
 
-	@ApiOperation(value = "Create a new user", nickname = "Create User")
-	@PostMapping(value = "/users", headers = "Accept=application/json", produces = "application/json")
-	private ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity user) {
-		logger.info("controller user saved sucessfully:::::::::::::");
-		return new ResponseEntity<UserEntity>(userService.saveUser(user), HttpStatus.OK);
-	}
+	/*
+	 * @ApiOperation(value = "Create a new user", nickname = "Create User")
+	 * 
+	 * @PostMapping(value = "/users", headers = "Accept=application/json", produces
+	 * = "application/json") private ResponseEntity<UserEntity>
+	 * saveUser(@RequestBody UserEntity user) throws Exception {
+	 * logger.info("controller user saved sucessfully:::::::::::::"); return new
+	 * ResponseEntity<UserEntity>(userService.saveUser(user), HttpStatus.OK); }
+	 */
 
+	
+	  @ApiOperation(value = "Create a new user", nickname = "Create User")
+	  
+	  @PostMapping(value = "/users")
+	  private ResponseEntity<UserEntity>
+	  saveUser(@RequestPart("file") MultipartFile file,@RequestPart("user") String user) throws Exception {
+	  logger.info("controller user saved sucessfully:::::::::::::"); return new
+	  ResponseEntity<UserEntity>(userService.saveUser(user,file), HttpStatus.OK); }
+	 
 	@ApiOperation(value = "Update/Create a  user", nickname = "UpdateOrCreateUser")
 	@PutMapping("/users/{id}")
 	UserEntity updateUser(@RequestBody UserEntity newUser, @PathVariable Long id) {

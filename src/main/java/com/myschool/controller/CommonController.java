@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myschool.Dto.CMGroupValuesDto;
+import com.myschool.dto.CMGroupValuesDto;
 import com.myschool.service.CommonService;
 import com.myschool.service.SchoolService;
 import com.myschool.service.UserService;

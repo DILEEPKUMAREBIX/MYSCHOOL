@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "holidays")
+//@Data
 public class HolidaysEntity extends AuditingEntity{
 	
 	@Id

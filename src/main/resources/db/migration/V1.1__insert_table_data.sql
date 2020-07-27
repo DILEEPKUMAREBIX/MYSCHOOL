@@ -184,6 +184,40 @@ VALUES ( (select id from cmgroup where name="Religion"),"HINDU","Hindu",true,"20
 ( (select id from cmgroup where name="Religion"),"CHRISTIAN","Christian",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" );
 
 
+ INSERT INTO `myschool`.`cmgroup`
+(
+`NAME`,
+`DESCRIPTION`,
+`ISACTIVE`,
+`created_date`,
+`last_updated_date`,
+`created_user`,
+`last_updated_user`)
+VALUES
+(
+"PERIODS",
+"PERIODS AVAILABLE FOR CLASS",
+1,
+"2020-04-02 14:58:15",
+"2020-04-02 14:58:15",
+"Dileep",
+"Dileep");
+
+
+INSERT INTO `myschool`.`cmvalue`
+(`GROUPID`,`NAME`,`DESCRIPTION`,`ISACTIVE`, `created_date`,`last_updated_date`,`created_user`,`last_updated_user`)
+VALUES
+( (select id from cmgroup where name="PERIODS"),"P1","Period 1",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P2","Period 2",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P3","Period 3",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P4","Period 4",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P5","Period 5",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P6","Period 6",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P7","Period 7",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"P8","Period 8",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"BREAK","Break",true ,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" ),
+( (select id from cmgroup where name="PERIODS"),"LUNCH BREAK","Lunch Break",true,"2020-04-02 14:58:15","2020-04-02 14:58:15","Dileep","Dileep" );
+
 
 
 

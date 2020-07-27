@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myschool.Dto.CMGroupValuesDto;
+import com.myschool.dto.CMGroupValuesDto;
 import com.myschool.repository.CMGroupRepository;
 
 @Service

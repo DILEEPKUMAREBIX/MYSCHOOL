@@ -20,12 +20,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 @Entity
 @Table(name = "user", schema = "myschool")
-@Data
+//@Data
 public class UserEntity extends AuditingEntity {
 
 	@Id
@@ -76,14 +77,17 @@ public class UserEntity extends AuditingEntity {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
+	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Date dateOfBirth;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "JOININGDATE")
+	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Date joiningDate;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ENDINGDATE",nullable = true)
+	@JsonFormat(pattern = "YYYY-MM-dd")
 	private Date endingDate;
 	
 	@Column(name = "SCHOOLID")
@@ -111,14 +115,14 @@ public class UserEntity extends AuditingEntity {
 	private Long religionId;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "RELIGION_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "RELIGIONID", insertable = false, updatable = false)
 	private CMValueEntity religion;
 	
 	@Column(name = "CASTEID")
 	private Long casteId;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "CASTE_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "CASTEID", insertable = false, updatable = false)
 	private CMValueEntity caste;
 	
 
@@ -363,5 +367,7 @@ public class UserEntity extends AuditingEntity {
 	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
-
+	
+	
+	
 }

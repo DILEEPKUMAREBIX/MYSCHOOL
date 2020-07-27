@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//@Data
 @Entity
 @Table(name = "address", schema = "myschool")
 public class AddressEntity extends AuditingEntity {
@@ -123,4 +124,5 @@ public class AddressEntity extends AuditingEntity {
 		this.isActive = isActive;
 	}
 
+	
 }

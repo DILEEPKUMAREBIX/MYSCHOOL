@@ -154,13 +154,13 @@ public class EventsService {
 	}
 
 	public String deleteFolder( String foldername) {
-		//EventsEntity event=eventsrepo.findByFolderName(foldername);
-	//	eventsrepo.deleteById(event.getEventId());
+		EventsEntity event=eventsrepo.findByFoldername(foldername);
+	eventsrepo.deleteById(event.getEventId());
 		for (S3ObjectSummary listOfFolders : s3client.listObjects(bucketName,foldername).getObjectSummaries()){
 			s3client.deleteObject(bucketName, listOfFolders.getKey());
 		}
-		//+"with id :"+event.getEventId()
-		return "Deleted folder name :"+foldername ;
+		
+		return "Deleted folder name :"+foldername +"with id :"+event.getEventId();
 	}
 
 

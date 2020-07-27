@@ -15,24 +15,33 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-@Table(name = "homework")
-//@Data
-public class HomeWorkEntity extends AuditingEntity {
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.annotations.ApiModelProperty;
+
+@Entity
+@Table(name="classperiod",schema = "myschool")
+//@Data
+public class ClassPeriodEntity {
+
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
-	private Long homeWorkId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(notes = "The database generated ID")
+	private Long classPeriodId;
 	
-	@Column(name = "DESCRIPTION")
-	private String description;
+	@Temporal(TemporalType.TIME)
+	@Column(name = "STARTTIME")
+	@JsonFormat(pattern = "hh:mm:ss")
+	private Date startTime;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "HOMEWORK_DATE")
-	private Date homeWorkDate;
+	@Temporal(TemporalType.TIME)
+	@Column(name = "ENDTIME")
+	@JsonFormat(pattern = "hh:mm:ss")
+	private Date endTime;
 	
-	@Column(name="ISACTIVE")
+	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 	
 	@Column(name = "SCHOOLID")
@@ -42,20 +51,12 @@ public class HomeWorkEntity extends AuditingEntity {
 	@JoinColumn(name = "SCHOOLID", insertable = false, updatable = false)
 	private SchoolEntity schoolName;
 	
-	
 	@Column(name = "CLASSID")
 	private Long classId;
 	
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "CLASSID", insertable = false, updatable = false) 
 	private CMValueEntity className;
-	
-	@Column(name = "SUBJECTID")
-	private Long subjectId;
-	
-	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "SUBJECTID", insertable = false, updatable = false) 
-	private CMValueEntity subjectName;
 	
 	@Column(name = "SECTIONID")
 	private Long sectionId;
@@ -64,28 +65,36 @@ public class HomeWorkEntity extends AuditingEntity {
 	@JoinColumn(name = "SECTIONID", insertable = false, updatable = false) 
 	private CMValueEntity sectionName;
 
-	public Long getHomeWorkId() {
-		return homeWorkId;
+	public Long getClassPeriodId() {
+		return classPeriodId;
 	}
 
-	public void setHomeWorkId(Long homeWorkId) {
-		this.homeWorkId = homeWorkId;
+	public void setClassPeriodId(Long classPeriodId) {
+		this.classPeriodId = classPeriodId;
 	}
 
-	public String getDescription() {
-		return description;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
-	public Date getHomeWorkDate() {
-		return homeWorkDate;
+	public Date getEndTime() {
+		return endTime;
 	}
 
-	public void setHomeWorkDate(Date homeWorkDate) {
-		this.homeWorkDate = homeWorkDate;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Long getSchoolIdno() {
@@ -100,8 +109,8 @@ public class HomeWorkEntity extends AuditingEntity {
 		return schoolName;
 	}
 
-	public void setSchoolName(SchoolEntity schooName) {
-		this.schoolName = schooName;
+	public void setSchoolName(SchoolEntity schoolName) {
+		this.schoolName = schoolName;
 	}
 
 	public Long getClassId() {
@@ -120,22 +129,6 @@ public class HomeWorkEntity extends AuditingEntity {
 		this.className = className;
 	}
 
-	public Long getSubjectId() {
-		return subjectId;
-	}
-
-	public void setSubjectId(Long subjectId) {
-		this.subjectId = subjectId;
-	}
-
-	public CMValueEntity getSubjectName() {
-		return subjectName;
-	}
-
-	public void setSubjectName(CMValueEntity subjectName) {
-		this.subjectName = subjectName;
-	}
-
 	public Long getSectionId() {
 		return sectionId;
 	}
@@ -151,17 +144,7 @@ public class HomeWorkEntity extends AuditingEntity {
 	public void setSectionName(CMValueEntity sectionName) {
 		this.sectionName = sectionName;
 	}
-
-	public Boolean getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
 	
-	
-	
+
 	
 }

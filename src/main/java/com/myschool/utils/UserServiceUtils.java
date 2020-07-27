@@ -1,10 +1,13 @@
 package com.myschool.utils;
 
 import java.io.InputStream;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -32,22 +35,44 @@ public class UserServiceUtils {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	
+	public UserEntity saveUserEntity(String userString,MultipartFile file) throws Exception {
+		
+		UserEntity newUser = new ObjectMapper().readValue(userString, UserEntity.class);
+		UserEntity user=new UserEntity();
+		user.setFirstName(newUser.getFirstName());
+		user.setLastName(newUser.getLastName());
+		user.setFatherName(newUser.getFatherName());
+		user.setMotherName(newUser.getMotherName());
+		//user.setImage(newUser.getImage());
+		user.setUserName(newUser.getUserName());
+		//WSuser.setPassword(newUser.getPassword());
+		user.setEmail(newUser.getEmail());
+		user.setIsActive(newUser.getIsActive());
+		user.setPhone(newUser.getPhone());
+		user.setRoles(newUser.getRoles());
+		user.setGenderId(newUser.getGenderId());
+		user.setPermissions(newUser.getPermissions());
+		user.setDateOfBirth(newUser.getDateOfBirth());
+		user.setJoiningDate(newUser.getJoiningDate());
+		user.setEndingDate(newUser.getEndingDate());
+		user.setSchoolId(newUser.getSchoolId());
+		user.setCategoryId(newUser.getCategoryId());
+		user.setCasteId(newUser.getCasteId());
+		user.setReligionId(newUser.getReligionId());
+		user.setIdProof(newUser.getIdProof());
+		user.setCreatedBy(newUser.getCreatedBy());
+		user.setCreatedDate(newUser.getCreatedDate());
+		user.setAddress(newUser.getAddress());
+		byte[] imgsize =file.getBytes(); 
+		Blob image = new SerialBlob(imgsize );
+		user.setImage(image);
+		user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+		return user;
+		
+	}
 
-	/*
-	 * public static boolean readDataFromCSV(MultipartFile file) { try {
-	 * InputStreamReader isr=new InputStreamReader(file.getInputStream()); CSVReader
-	 * csv=new CSVReaderBuilder(isr).withSkipLines(1).build(); List<String[]>
-	 * rows=csv.readAll(); for(String[] row:rows) { UserEntity user=new
-	 * UserEntity(); user.setFirstName(row[0]); user.setLastName(row[1]);
-	 * user.setFatherName(row[2]); user.setMotherName(row[3]);
-	 * //user.setImage(row[4]); user.setUserName(row[5]); user.setPassword(row[6]);
-	 * user.setEmail(row[7]); user.setPhone(row[8]); user.setRoles(row[9]);
-	 * user.setPermissions(row[10]); user.setDateOfBirth(row[11]);
-	 * user.setJoiningDate(row[12]); user.setEndingDate(row[13]);
-	 * user.setSchoolId(row[14]); user.setCategoryId(row[15]);
-	 * 
-	 * userRepo.save(user); } return true; } catch (Exception e) { return false; } }
-	 */
 	public boolean readDataFromJson(MultipartFile file) {
 		try {
 			InputStream is = file.getInputStream();
@@ -132,9 +157,13 @@ public class UserServiceUtils {
 			if (row.getCell(25).getCellType() == CellType.NUMERIC) {
 				user.setReligionId((long)  row.getCell(25).getNumericCellValue());
 			}
-			if (row.getCell(26).getCellType() == CellType.STRING) {
-				user.setIdProof( row.getCell(26).getStringCellValue());
+			if (row.getCell(26).getCellType() == CellType.NUMERIC) {
+				String idproof = NumberToTextConverter.toText(row.getCell(26).getNumericCellValue());
+				user.setIdProof(idproof);
+			} else if (row.getCell(26).getCellType() == CellType.STRING) {
+				user.setIdProof(row.getCell(26).getStringCellValue());
 			}
+			
 			AddressEntity address = new AddressEntity();
 			
 			if (row.getCell(15).getCellType() == CellType.STRING) {
@@ -186,4 +215,21 @@ public class UserServiceUtils {
 		}
 		return wb;
 	}
+	
+	/*
+	 * public static boolean readDataFromCSV(MultipartFile file) { try {
+	 * InputStreamReader isr=new InputStreamReader(file.getInputStream()); CSVReader
+	 * csv=new CSVReaderBuilder(isr).withSkipLines(1).build(); List<String[]>
+	 * rows=csv.readAll(); for(String[] row:rows) { UserEntity user=new
+	 * UserEntity(); user.setFirstName(row[0]); user.setLastName(row[1]);
+	 * user.setFatherName(row[2]); user.setMotherName(row[3]);
+	 * //user.setImage(row[4]); user.setUserName(row[5]); user.setPassword(row[6]);
+	 * user.setEmail(row[7]); user.setPhone(row[8]); user.setRoles(row[9]);
+	 * user.setPermissions(row[10]); user.setDateOfBirth(row[11]);
+	 * user.setJoiningDate(row[12]); user.setEndingDate(row[13]);
+	 * user.setSchoolId(row[14]); user.setCategoryId(row[15]);
+	 * 
+	 * userRepo.save(user); } return true; } catch (Exception e) { return false; } }
+	 */
+	
 }

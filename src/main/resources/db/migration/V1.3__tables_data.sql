@@ -1,0 +1,27 @@
+INSERT INTO `myschool`.`classperiod` (
+  `STARTTIME`,
+  `ENDTIME`,
+  `ISACTIVE`,
+  `SCHOOLID`,
+  `CLASSID`,
+  `SECTIONID`,
+   `created_date`,
+  `created_user`,
+  `last_updated_date`,
+  `last_updated_user`)
+  VALUES
+  ('09:00:00','10:00:00','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'A' LIMIT 1),
+  '2020-01-01','DILEEP','2020-01-01','DILEEP'),
+  ('10:00:00','11:00:00','1',(select id from school where NAME= 'Maharshi' LIMIT 1),
+  (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'A' LIMIT 1),
+  '2020-01-01','DILEEP','2020-01-01','DILEEP'),
+  ('11:00:00','12:00:00','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'A' LIMIT 1),
+  '2020-01-01','DILEEP','2020-01-01','DILEEP'),
+  ('12:00:00','13:00:00','1',(select id from school where NAME= 'Maharshi' LIMIT 1),
+  (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'A' LIMIT 1),
+  '2020-01-01','DILEEP','2020-01-01','DILEEP'),
+  ('13:00:00','14:00:00','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'A' LIMIT 1),
+  '2020-01-01','DILEEP','2020-01-01','DILEEP');

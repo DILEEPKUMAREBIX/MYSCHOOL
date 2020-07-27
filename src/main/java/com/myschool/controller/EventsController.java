@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,10 +32,10 @@ public class EventsController {
 	private EventsService eventservice;
 
 	@SuppressWarnings("unused")
-	@PostMapping("/uploadFile/{foldername}")
+	@PostMapping("/uploadFile")
 	public ResponseEntity<String>  uploadFile(
-			@PathVariable String foldername,
-			@RequestParam(value = "file") MultipartFile[] files) {
+			@RequestPart(value = "foldername") String foldername,
+			@RequestPart(value = "file") MultipartFile[] files) {
 		String msg="";
 		boolean	isFlag= eventservice.uploadFile(files,foldername);
 		if(isFlag=true) {
