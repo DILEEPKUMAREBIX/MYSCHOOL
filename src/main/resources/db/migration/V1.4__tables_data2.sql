@@ -67,8 +67,7 @@ INSERT INTO `myschool`.`schoolclassperiods` (
    
    
    INSERT INTO `myschool`.`timetable` (
-  `STARTDATE`,
-  `ENDDATE` ,
+  `TIMETABLEDATE`,
   `ISACTIVE`,
   `SCHOOLID`,
   `CLASSID` ,
@@ -81,19 +80,19 @@ INSERT INTO `myschool`.`schoolclassperiods` (
   `last_updated_date`,
   `last_updated_user`)
   VALUES
-  ('2020-01-01',null,'1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  ('2020-01-01','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
   (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'A' LIMIT 1),
   (select id from cmvalue where NAME = 'TELUGU' LIMIT 1),(select id from classperiod where ID = '1' LIMIT 1),
   (select id from classteachersubject where id = '1' LIMIT 1),'2020-01-01','DILEEP','2020-01-01','DILEEP'),
-  ('2020-01-01',null,'1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  ('2020-01-01','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
   (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'B' LIMIT 1),
   (select id from cmvalue where NAME = 'MATHS' LIMIT 1),(select id from classperiod where ID = '2' LIMIT 1),
   (select id from classteachersubject where id = '1' LIMIT 1),'2020-01-01','DILEEP','2020-01-01','DILEEP'),
-  ('2020-01-01',null,'1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  ('2020-01-01','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
   (select id from cmvalue where NAME = '6' LIMIT 1),(select id from cmvalue where NAME = 'C' LIMIT 1),
   (select id from cmvalue where NAME = 'ENGLISH' LIMIT 1),(select id from classperiod where ID = '3' LIMIT 1),
   (select id from classteachersubject where id = '1' LIMIT 1),'2020-01-01','DILEEP','2020-01-01','DILEEP'),
-  ('2020-01-01',null,'1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
+  ('2020-01-01','1',(select id from school where NAME= 'Bhaskar High School' LIMIT 1),
   (select id from cmvalue where NAME = '' LIMIT 1),(select id from cmvalue where NAME = 'D' LIMIT 1),
   (select id from cmvalue where NAME = 'HINDI' LIMIT 1),(select id from classperiod where ID = '4' LIMIT 1),
   (select id from classteachersubject where id = '1' LIMIT 1),'2020-01-01','DILEEP','2020-01-01','DILEEP');

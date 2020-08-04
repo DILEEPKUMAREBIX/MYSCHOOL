@@ -7,13 +7,14 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.myschool.entity.TimeTableEntity;
 import com.myschool.service.TimeTableService;
@@ -23,13 +24,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Controller
+@RestController
 @Api(value = "timetable CRUD", description = "Manage timetable list")
 @RequestMapping("/myschool")
 public class TimeTableController {
 
 	private static final Logger logger = LogManager.getLogger(TimeTableController.class);
-	
+
 	@Autowired
 	private TimeTableService timetableservice;
 
@@ -49,9 +50,9 @@ public class TimeTableController {
 	@ApiOperation(value = "View a timetable", response = Iterable.class)
 	@GetMapping("/timetables/{id}")
 	TimeTableEntity gettimetable(@PathVariable Long id) {
-		
+
 		TimeTableEntity timetable=	timetableservice.gettimetable(id);
-		
+
 		logger.info("controller selected timetable details with id:::::::::::"+id );
 		return timetable;
 	}
@@ -64,18 +65,15 @@ public class TimeTableController {
 		return new ResponseEntity<TimeTableEntity>(timetableobj, HttpStatus.OK);
 	}
 
-	/*
-	 * @ApiOperation(value = "Update/Create a  timetable", nickname =
-	 * "UpdateOrCreatetimetable")
-	 * 
-	 * @PutMapping("/timetables/{id}") TimeTableEntity updatetimetable(@RequestBody
-	 * TimeTableEntity newtimetable, @PathVariable Long id) {
-	 * 
-	 * TimeTableEntity timetableobj1=timetableservice.updatedtimetable(newtimetable,
-	 * id); logger.info("controller timetable updated with id:::::::::::"+id );
-	 * 
-	 * return timetableobj1; }
-	 */
+
+	@ApiOperation(value = "Update/Create a  timetable", nickname ="UpdateOrCreatetimetable")
+	@PutMapping("/timetables/{id}") 
+	TimeTableEntity updatetimetable(@RequestBody TimeTableEntity newtimetable, @PathVariable Long id) {
+		TimeTableEntity timetableobj1=timetableservice.updatedtimetable(newtimetable,id);
+		logger.info("controller timetable updated with id:::::::::::"+id );
+		return timetableobj1;
+	}
+
 	@ApiOperation(value = "Delete a  timetable", nickname = "Deletetimetable")
 	@DeleteMapping("/timetables/{id}")
 	void deletetimetable(@PathVariable Long id) {

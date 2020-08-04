@@ -31,14 +31,9 @@ public class TimeTableEntity extends AuditingEntity{
 	private Long timeTableId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "STARTDATE")
+	@Column(name = "TIMETABLEDATE")
 	@JsonFormat(pattern = "YYYY-MM-dd")
-	private Date startDate;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "ENDDATE",nullable = true)
-	@JsonFormat(pattern = "YYYY-MM-dd")
-	private Date endDate;
+	private Date timeTableDate;
 
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
@@ -94,20 +89,13 @@ public class TimeTableEntity extends AuditingEntity{
 		this.timeTableId = timeTableId;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	
+	public Date getTimeTableDate() {
+		return timeTableDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setTimeTableDate(Date timeTableDate) {
+		this.timeTableDate = timeTableDate;
 	}
 
 	public Boolean getIsActive() {
