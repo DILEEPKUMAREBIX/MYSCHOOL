@@ -68,6 +68,8 @@ public class ClassPeriodEntity extends AuditingEntity{
 	@JoinColumn(name = "SECTIONID", insertable = false, updatable = false) 
 	private CMValueEntity sectionName;
 
+	
+	
 	public Long getClassPeriodId() {
 		return classPeriodId;
 	}
