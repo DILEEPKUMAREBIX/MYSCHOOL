@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value = "ClassPeriod CRUD", description = "Manage classperiod list")
-@RequestMapping("/myClassPeriod")
+@RequestMapping("/myschool")
 @CrossOrigin
 public class ClassPeriodController {
 	

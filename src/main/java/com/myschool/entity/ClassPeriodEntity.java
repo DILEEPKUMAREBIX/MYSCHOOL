@@ -1,6 +1,6 @@
 package com.myschool.entity;
 
-import java.util.Date;
+import java.sql.Time;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name="classperiod",schema = "myschool")
 //@Data
-public class ClassPeriodEntity {
+public class ClassPeriodEntity extends AuditingEntity{
 
 	
 	@Id
@@ -31,15 +29,13 @@ public class ClassPeriodEntity {
 	@ApiModelProperty(notes = "The database generated ID")
 	private Long classPeriodId;
 	
-	@Temporal(TemporalType.TIME)
 	@Column(name = "STARTTIME")
-	@JsonFormat(pattern = "hh:mm:ss")
-	private Date startTime;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private Time startTime;
 	
-	@Temporal(TemporalType.TIME)
 	@Column(name = "ENDTIME")
-	@JsonFormat(pattern = "hh:mm:ss")
-	private Date endTime;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private Time endTime;
 	
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
@@ -73,19 +69,19 @@ public class ClassPeriodEntity {
 		this.classPeriodId = classPeriodId;
 	}
 
-	public Date getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public Time getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 
@@ -144,7 +140,6 @@ public class ClassPeriodEntity {
 	public void setSectionName(CMValueEntity sectionName) {
 		this.sectionName = sectionName;
 	}
-	
 
 	
 }
