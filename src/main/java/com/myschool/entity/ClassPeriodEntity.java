@@ -40,6 +40,13 @@ public class ClassPeriodEntity extends AuditingEntity{
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 	
+	@Column(name = "PERIODID")
+	private Long periodIdno;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "PERIODID", insertable = false, updatable = false)
+	private CMValueEntity periodName;
+	
 	@Column(name = "SCHOOLID")
 	private Long schoolIdno;
 	
@@ -140,6 +147,24 @@ public class ClassPeriodEntity extends AuditingEntity{
 	public void setSectionName(CMValueEntity sectionName) {
 		this.sectionName = sectionName;
 	}
+
+	public Long getPeriodIdno() {
+		return periodIdno;
+	}
+
+	public void setPeriodIdno(Long periodIdno) {
+		this.periodIdno = periodIdno;
+	}
+
+	public CMValueEntity getPeriodName() {
+		return periodName;
+	}
+
+	public void setPeriodName(CMValueEntity periodName) {
+		this.periodName = periodName;
+	}
+
+	
 
 	
 }

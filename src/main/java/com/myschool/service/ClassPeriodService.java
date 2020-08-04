@@ -43,6 +43,7 @@ public class ClassPeriodService {
 			classPeriod.setIsActive(newClassPeriod.getIsActive());
 			classPeriod.setStartTime(newClassPeriod.getStartTime());
 			classPeriod.setEndTime(newClassPeriod.getEndTime());
+			classPeriod.setPeriodIdno(newClassPeriod.getPeriodIdno());
 			return classPeriodRepo.save(classPeriod);
 
 		}).orElseGet(() -> {
