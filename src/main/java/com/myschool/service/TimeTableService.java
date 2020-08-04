@@ -23,7 +23,7 @@ public class TimeTableService {
 	private TimeTableRepository timetablerepo;
 
 	public List<TimeTableEntity> gettimetables() {
-		logger.info("controller list of timetables :::::::::::");
+		logger.info("service list of timetables :::::::::::");
 		return timetablerepo.findAll();
 	}
 
