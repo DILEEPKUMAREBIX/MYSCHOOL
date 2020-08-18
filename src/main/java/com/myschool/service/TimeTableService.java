@@ -1,6 +1,10 @@
 package com.myschool.service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,9 +26,22 @@ public class TimeTableService {
 	@Autowired
 	private TimeTableRepository timetablerepo;
 
-	public List<TimeTableEntity> gettimetables() {
+	public Map<Date, List<TimeTableEntity>> gettimetables() {
 		logger.info("service list of timetables :::::::::::");
-		return timetablerepo.findAll();
+		
+		List<TimeTableEntity> timetablelist=timetablerepo.findAll();
+		Map<Date, List<TimeTableEntity>> timetablemap = new HashMap<>();
+		
+		
+		for(TimeTableEntity timetable:timetablelist){
+			Date date = timetable.getTimeTableDate();
+		    
+
+			timetablemap.computeIfAbsent(date, k -> new ArrayList<>()).add(timetable);
+		}
+		
+		
+		return timetablemap ;
 	}
 
 	public TimeTableEntity gettimetable(@PathVariable Long id) {

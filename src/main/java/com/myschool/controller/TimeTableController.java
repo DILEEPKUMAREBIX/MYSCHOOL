@@ -1,6 +1,8 @@
 package com.myschool.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,8 +42,8 @@ public class TimeTableController {
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@GetMapping(value = "/timetables")
-	private List<TimeTableEntity> gettimetables() {
-		List<TimeTableEntity> timetablelist=timetableservice.gettimetables();
+	private Map<Date, List<TimeTableEntity>> gettimetables() {
+		Map<Date, List<TimeTableEntity>> timetablelist=timetableservice.gettimetables();
 		logger.info("controller list of timetables :::::::::::" );
 		return timetablelist;
 	}
