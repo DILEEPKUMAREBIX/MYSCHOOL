@@ -1,5 +1,6 @@
 package com.myschool.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +42,13 @@ public class TimeTableController {
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
-	@GetMapping(value = "/timetables")
-	private Map<Date, List<TimeTableEntity>> gettimetables() {
-		Map<Date, List<TimeTableEntity>> timetablelist=timetableservice.gettimetables();
+	@GetMapping(value = "/timetables/{startdate}/{enddate}")
+	private Map<Date, List<TimeTableEntity>> gettimetables(@PathVariable String startdate,
+			@PathVariable String enddate) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date startingDate= formatter.parse(startdate);
+		Date endingDate= formatter.parse(enddate);	   
+		Map<Date, List<TimeTableEntity>> timetablelist=timetableservice.gettimetables(startingDate,endingDate);
 		logger.info("controller list of timetables :::::::::::" );
 		return timetablelist;
 	}

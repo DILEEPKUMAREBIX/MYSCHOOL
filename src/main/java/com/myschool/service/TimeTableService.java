@@ -26,10 +26,10 @@ public class TimeTableService {
 	@Autowired
 	private TimeTableRepository timetablerepo;
 
-	public Map<Date, List<TimeTableEntity>> gettimetables() {
+	public Map<Date, List<TimeTableEntity>> gettimetables(Date startdate,Date enddate) {
 		logger.info("service list of timetables :::::::::::");
 		
-		List<TimeTableEntity> timetablelist=timetablerepo.findAll();
+		List<TimeTableEntity> timetablelist=timetablerepo.getAllTimetableData(startdate, enddate);
 		Map<Date, List<TimeTableEntity>> timetablemap = new HashMap<>();
 		
 		
