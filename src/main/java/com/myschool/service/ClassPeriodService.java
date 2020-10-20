@@ -30,7 +30,11 @@ public class ClassPeriodService {
 	}
 
 	public ClassPeriodEntity saveClassPeriod(ClassPeriodEntity classPeriod) {
-		logger.info("service classPeriod saved sucessfully::::::::::::::::::");
+		
+		/*
+		 * ObjectMapper mapper = new ObjectMapper(); ClassPeriodEntity
+		 * classperiodentity=mapper.readValues(classPeriod, ClassPeriodEntity.class);
+		 */logger.info("service classPeriod saved sucessfully::::::::::::::::::");
 		return classPeriodRepo.save(classPeriod);
 	}
 

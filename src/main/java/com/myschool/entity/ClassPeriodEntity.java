@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.myschool.domain.SqlTimeDeserializer;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -31,10 +33,12 @@ public class ClassPeriodEntity extends AuditingEntity{
 	
 	@Column(name = "STARTTIME")
 	@JsonFormat(pattern = "HH:mm:ss")
+	@JsonDeserialize(using = SqlTimeDeserializer.class)
 	private Time startTime;
 	
 	@Column(name = "ENDTIME")
 	@JsonFormat(pattern = "HH:mm:ss")
+	@JsonDeserialize(using = SqlTimeDeserializer.class)
 	private Time endTime;
 	
 	@Column(name = "ISACTIVE")

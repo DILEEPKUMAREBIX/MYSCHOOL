@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @Api(value = "ClassPeriod CRUD", description = "Manage classperiod list")
 @RequestMapping("/myschool")
-@CrossOrigin
+@CrossOrigin(origins ="http://localhost:4200")
 public class ClassPeriodController {
 	
 	private static final Logger logger = LogManager.getLogger(ClassPeriodController.class);
